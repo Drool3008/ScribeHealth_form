@@ -10,8 +10,8 @@ import { FileText, Clock, ShieldAlert, ZapIcon } from "lucide-react"
 
 const transcripts = [
   {
-    doctor: "Dr. Rohan Mehta",
-    title: "General Physician, Ahmedabad (Age 34)",
+    doctor: "Dr. B Anusha",
+    title: "General Physician, Helora Clinic, Hyderabad",
     answers: {
       Q1: "I quickly jot down the diagnosis, prescription, maybe a test I've referred. Then the next patient is already waiting, so I just move on. I try to keep it brief.",
       Q2: "I use a tablet — there's a software on it. But honestly it's not very smooth, so for a lot of follow-up patients I just handwrite a prescription and enter data later when the queue dies down.",
@@ -24,8 +24,8 @@ const transcripts = [
     }
   },
   {
-    doctor: "Dr. Neha Kapoor",
-    title: "Clinical Psychologist, Chandigarh (Age 28)",
+    doctor: "Dr. Swathi",
+    title: "Clinical Psychologist, Helora Clinic, Hyderabad",
     answers: {
       Q1: "After a session, I write my session notes while everything is fresh — the themes that came up, interventions I used, observations, and the plan for next time.",
       Q2: "I use Notion for my notes. It's not a clinical tool exactly, but I've set it up to work the way I need. For formal records I print and file hard copies.",
@@ -38,8 +38,8 @@ const transcripts = [
     }
   },
   {
-    doctor: "Dr. Ravi Iyer",
-    title: "Surgeon, Chennai (Age 45)",
+    doctor: "Dr. Samreen",
+    title: "Surgeon, Care Hospitals",
     answers: {
       Q1: "Post-surgery there's a detailed operative note. Then post-op orders. For OPD visits, I dictate notes and my assistant enters them.",
       Q2: "Dictation via assistant (OPD), direct entry into hospital system (surgery), paper for pre-op.",
@@ -52,8 +52,8 @@ const transcripts = [
     }
   },
   {
-    doctor: "Dr. Farhan Ali",
-    title: "Pediatrician, Lucknow (Age 39)",
+    doctor: "Dr. Akram",
+    title: "Pediatrician, Care Hospitals",
     answers: {
       Q1: "I finish the prescription, update records, and sometimes message parents summaries on WhatsApp.",
       Q2: "Pediatric EMR tool + WhatsApp + paper files.",
@@ -66,8 +66,8 @@ const transcripts = [
     }
   },
   {
-    doctor: "Dr. Vikram Joshi",
-    title: "Orthopedic Resident, Jaipur (Age 33)",
+    doctor: "Dr. Prakash",
+    title: "Orthopedic Resident, Care Hospitals",
     answers: {
       Q1: "Quick OPD notes. In wards, continuous updates after interactions.",
       Q2: "Mostly handwritten. Some HIS usage but not intuitive.",
@@ -80,8 +80,8 @@ const transcripts = [
     }
   },
   {
-    doctor: "Dr. Sanjay Kulkarni",
-    title: "Cardiologist, Bengaluru (Age 44)",
+    doctor: "Dr. Bez Samuel",
+    title: "Cardiologist, Care Hospitals",
     answers: {
       Q1: "Update findings, write prescription, dictate summary if needed.",
       Q2: "Diagnostic software + dictation + manual entry.",
