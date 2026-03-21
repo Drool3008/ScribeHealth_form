@@ -31,6 +31,7 @@ export default function Rq1Page() {
   const { data: dbResponses, loading } = useSurveyData()
   const [dailyTime, setDailyTime] = React.useState(0)
   const [afterHours, setAfterHours] = React.useState(0)
+  const [avgPatients, setAvgPatients] = React.useState(0)
   const [workflow, setWorkflow] = React.useState<any[]>([])
   const [mentalTire, setMentalTire] = React.useState<any[]>([])
   const [patientsData, setPatientsData] = React.useState<any[]>([])
@@ -42,13 +43,16 @@ export default function Rq1Page() {
     let totalDocs = finalData.length
     let totalDailyTime = 0
     let afterHoursCount = 0
+    let totalPatients = 0
     let workflowCounts: Record<string, number> = { "Immediately after each session": 0, "End of day": 0, "After work hours": 0 }
     const mentalCounts: Record<string, number> = {}
     const patientCounts: Record<string, number> = {}
 
     finalData.forEach(r => {
       const a = r.answers || {}
-      totalDailyTime += mapPatients(a.D5) * mapTime(a.Q1)
+      const curPatients = mapPatients(a.D5)
+      totalPatients += curPatients
+      totalDailyTime += curPatients * mapTime(a.Q1)
       if (a.Q2 === "After work hours") afterHoursCount++
       if (a.Q2) workflowCounts[a.Q2] = (workflowCounts[a.Q2] || 0) + 1
       
@@ -57,6 +61,7 @@ export default function Rq1Page() {
     })
 
     setDailyTime(totalDocs > 0 ? totalDailyTime / totalDocs : 0)
+    setAvgPatients(totalDocs > 0 ? totalPatients / totalDocs : 0)
     setAfterHours(totalDocs > 0 ? (afterHoursCount / totalDocs) * 100 : 0)
     setWorkflow(Object.entries(workflowCounts).map(([name, value]) => ({ name, value })))
     setMentalTire(Object.entries(mentalCounts).map(([name, value]) => ({ name, value })))
@@ -75,14 +80,15 @@ export default function Rq1Page() {
       <Alert className="bg-primary/5 border-primary/20 shadow-sm animate-in zoom-in duration-300">
         <HelpCircle className="size-5 text-primary" />
         <AlertDescription className="ml-2">
-          <span className="font-bold text-foreground">💡 Core Insight:</span> Doctors spend an average of <span className="underline decoration-primary font-semibold">{dailyTime.toFixed(0)} mins/day</span> on documentation, with <span className="underline decoration-primary font-semibold">{afterHours.toFixed(0)}%</span> reporting extend limits pushing into after-hours workloads setups.
+          <span className="font-bold text-foreground">💡 Core Insight:</span> Doctors spend an average of <span className="underline decoration-primary font-semibold">{(dailyTime / 60).toFixed(1)} hrs/day</span> on documentation, with <span className="underline decoration-primary font-semibold">{afterHours.toFixed(0)}%</span> reporting extend limits pushing into after-hours workloads setups.
         </AlertDescription>
       </Alert>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="border p-6 hover:shadow-md transition-all duration-300">
           <div className="text-xs uppercase font-semibold text-muted-foreground">Daily effort</div>
-          <div className="text-3xl font-bold mt-1 text-foreground">{dailyTime.toFixed(0)} mins / day</div>
+          <div className="text-3xl font-bold mt-1 text-foreground">{(dailyTime / 60).toFixed(1)} hrs/day</div>
+          <div className="text-xs text-muted-foreground mt-1">Based on ~{avgPatients.toFixed(1)} patients/day</div>
         </Card>
         <Card className="border p-6 hover:shadow-md transition-all duration-300">
           <div className="text-xs uppercase font-semibold text-muted-foreground">After Office Burn</div>

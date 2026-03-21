@@ -57,6 +57,7 @@ export default function DashboardPage() {
   const [metrics, setMetrics] = React.useState({
     totalDocs: 0,
     avgDailyTime: 0,
+    avgPatients: 0,
     afterHoursLoad: 0,
     avgSatisfaction: 0,
     toolsFragScore: 0,
@@ -83,6 +84,7 @@ export default function DashboardPage() {
     let totalDocs = responses.length
     
     let totalDailyTime = 0
+    let totalPatients = 0
     let afterHoursCount = 0
     let workflowCounts: Record<string, number> = { "Immediately after each session": 0, "End of day": 0, "After work hours": 0 }
 
@@ -103,6 +105,7 @@ export default function DashboardPage() {
       const a = r.answers || {}
 
       const patientCount = mapPatients(a.D5)
+      totalPatients += patientCount
       const timePerPatient = mapTime(a.Q1)
       totalDailyTime += patientCount * timePerPatient
       if (a.Q2 === "After work hours") afterHoursCount++
@@ -129,6 +132,7 @@ export default function DashboardPage() {
     setMetrics({
       totalDocs,
       avgDailyTime: totalDocs > 0 ? totalDailyTime / totalDocs : 0,
+      avgPatients: totalDocs > 0 ? totalPatients / totalDocs : 0,
       afterHoursLoad: totalDocs > 0 ? (afterHoursCount / totalDocs) * 100 : 0,
       avgSatisfaction: totalDocs > 0 ? totalSatisfaction / totalDocs : 0,
       toolsFragScore: totalDocs > 0 ? totalTools / totalDocs : 0,
@@ -179,7 +183,8 @@ export default function DashboardPage() {
           </div>
           <div>
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">Daily Doc Effort</span>
-            <div className="text-xl font-bold mt-1 text-foreground">{metrics.avgDailyTime.toFixed(0)} mins</div>
+            <div className="text-xl font-bold mt-1 text-foreground">{(metrics.avgDailyTime / 60).toFixed(1)} hrs/day</div>
+            <div className="text-[10px] text-muted-foreground">Avg. ~{metrics.avgPatients.toFixed(1)} patients/day</div>
           </div>
           <div>
             <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">Pain Score 1-5 Scale</span>
@@ -198,7 +203,7 @@ export default function DashboardPage() {
                 <CardTitle className="text-lg flex items-center gap-2"><Clock className="size-5 text-muted-foreground" /> RQ1: Time & Effort</CardTitle>
                 <Link href="/dashboard/rq1" className="text-xs text-primary hover:underline font-medium">Details &rarr;</Link>
               </div>
-              <CardDescription>“Doctors spend {metrics.avgDailyTime.toFixed(0)} mins/day on documentation”</CardDescription>
+              <CardDescription>“Doctors spend {(metrics.avgDailyTime / 60).toFixed(1)} hrs/day on documentation on avg”</CardDescription>
             </CardHeader>
             <CardContent className="h-64">
               <ResponsiveContainer width="100%" height="100%">
