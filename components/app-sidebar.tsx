@@ -15,7 +15,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon } from "lucide-react"
+import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CameraIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon, Github } from "lucide-react"
 
 const data = {
   user: {
@@ -73,6 +73,13 @@ const data = {
       url: "/dashboard/data-library",
       icon: (
         <DatabaseIcon />
+      ),
+    },
+    {
+      name: "GitHub Repository",
+      url: "https://github.com/Drool3008/ScribeHealth_form",
+      icon: (
+        <Github className="size-4" />
       ),
     },
   ],

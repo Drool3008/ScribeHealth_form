@@ -33,7 +33,7 @@ export function SiteHeader() {
         <h1 className="text-base font-medium">{getPageTitle(pathname)}</h1>
 
         <div className="ml-auto flex items-center gap-1.5 px-2 text-xs text-muted-foreground font-medium selection:text-none">
-          Developed by <span className="text-foreground font-semibold">Team Nomads</span> with <Heart className="size-3.5 text-red-500 fill-red-500 animate-pulse" />
+          Developed by <span className="text-foreground font-semibold">Team Nomads</span> with ❤️
         </div>
       </div>
     </header>
