@@ -18,6 +18,30 @@ export default function DataLibraryPage() {
     )
   }
 
+  const renderTableBody = () => {
+    if (dbData.length === 0) {
+      return (
+        <TableRow>
+          <TableCell colSpan={7} className="h-24 text-center text-muted-foreground text-sm">
+            No raw survey data fetched or stored.
+          </TableCell>
+        </TableRow>
+      )
+    }
+
+    return dbData.map((r, index) => (
+      <TableRow key={r.id || index} className="hover:bg-muted/30">
+        <TableCell className="text-center text-xs text-muted-foreground font-medium">{index + 1}</TableCell>
+        <TableCell className="text-sm text-foreground">{(r.answers as any)?.D1 || "N/A"}</TableCell>
+        <TableCell className="text-sm text-foreground">{(r.answers as any)?.D5 || "N/A"}</TableCell>
+        <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q1 || "N/A"}</TableCell>
+        <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q2 || "N/A"}</TableCell>
+        <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q4 || "N/A"}/5</TableCell>
+        <TableCell className="text-sm text-muted-foreground">{(r.answers as any)?.Q5 || "N/A"}</TableCell>
+      </TableRow>
+    ))
+  }
+
   return (
     <div className="py-4 space-y-6 px-4 lg:px-6 animate-in fade-in duration-500">
       <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
@@ -42,24 +66,7 @@ export default function DataLibraryPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {dbData.map((r, index) => (
-                  <TableRow key={r.id || index} className="hover:bg-muted/30">
-                    <TableCell className="text-center text-xs text-muted-foreground font-medium">{index + 1}</TableCell>
-                    <TableCell className="text-sm text-foreground">{(r.answers as any)?.D1 || "N/A"}</TableCell>
-                    <TableCell className="text-sm text-foreground">{(r.answers as any)?.D5 || "N/A"}</TableCell>
-                    <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q1 || "N/A"}</TableCell>
-                    <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q2 || "N/A"}</TableCell>
-                    <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q4 || "N/A"}/5</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{(r.answers as any)?.Q5 || "N/A"}</TableCell>
-                  </TableRow>
-                ))}
-                {dbData.length === 0 && (
-                  <TableRow>
-                    <TableCell colSpan={7} className="h-24 text-center text-muted-foreground text-sm">
-                      No raw survey data fetched or stored.
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {renderTableBody()}
               </TableBody>
             </Table>
           </div>

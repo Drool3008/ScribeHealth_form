@@ -29,9 +29,7 @@ export default function ReportPage() {
 
   return (
     <div className="py-4 space-y-6 px-4 lg:px-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
-      
-        <p className="text-sm text-muted-foreground">Detailed profiling and structured Analysis dashboard framing conclusions optimally.</p>
-      </div>
+
 
       <Alert className="bg-primary/5 border-primary/20 shadow-sm animate-in zoom-in duration-300">
         <Target className="size-5 text-primary" />
