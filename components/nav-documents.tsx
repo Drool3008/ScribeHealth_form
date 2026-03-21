@@ -28,6 +28,7 @@ export function NavDocuments({
     url: string
     icon: React.ReactNode
     tooltip?: string
+    newTab?: boolean
   }[]
 }) {
   const { isMobile } = useSidebar()
@@ -39,45 +40,11 @@ export function NavDocuments({
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild tooltip={item.tooltip}>
-              <Link href={item.url}>
+              <Link href={item.url} target={item.newTab ? "_blank" : undefined}>
                 {item.icon}
                 <span>{item.name}</span>
               </Link>
             </SidebarMenuButton>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuAction
-                  showOnHover
-                  className="rounded-sm data-[state=open]:bg-accent"
-                >
-                  <MoreHorizontalIcon
-                  />
-                  <span className="sr-only">More</span>
-                </SidebarMenuAction>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-24 rounded-lg"
-                side={isMobile ? "bottom" : "right"}
-                align={isMobile ? "end" : "start"}
-              >
-                <DropdownMenuItem>
-                  <FolderIcon
-                  />
-                  <span>Open</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <ShareIcon
-                  />
-                  <span>Share</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem variant="destructive">
-                  <Trash2Icon
-                  />
-                  <span>Delete</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </SidebarMenuItem>
         ))}
       </SidebarMenu>

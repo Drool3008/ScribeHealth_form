@@ -81,6 +81,7 @@ const data = {
       icon: (
         <Github className="size-4" />
       ),
+      newTab: true,
     },
     {
       name: "Live Survey Form",
@@ -88,7 +89,8 @@ const data = {
       icon: (
         <FileTextIcon />
       ),
-      tooltip: "This is a survey which was taken from the doctors and this is the dashboard where all the data is analysed."
+      tooltip: "This is a survey which was taken from the doctors and this is the dashboard where all the data is analysed.",
+      newTab: true,
     },
   ],
 }
