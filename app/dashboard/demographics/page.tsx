@@ -7,7 +7,7 @@ import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend, BarChart, Ba
 import { Skeleton } from "@/components/ui/skeleton"
 
 const COLORS = [
-  'var(--foreground)',
+  'var(--color-primary)',
   'var(--primary)',
   'var(--muted-foreground)',
   'var(--accent-foreground)',
@@ -80,8 +80,8 @@ export default function DemographicsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-lg">Primary Specializations (D1)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Primary Specializations (D1)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -95,15 +95,15 @@ export default function DemographicsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-lg">Primary Workplaces (D3)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Primary Workplaces (D3)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={charts.d3}>
                 <XAxis dataKey="name" fontSize={11} tickLine={false} />
                 <YAxis type="number" fontSize={11} tickLine={false} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
-                <Bar dataKey="value" fill="var(--foreground)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -111,22 +111,22 @@ export default function DemographicsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-sm">Experience (D2)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Experience (D2)</CardTitle></CardHeader>
           <CardContent className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={charts.d2}>
                 <XAxis dataKey="name" fontSize={10} tickLine={false} />
                 <YAxis type="number" fontSize={10} tickLine={false} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
-                <Bar dataKey="value" fill="var(--foreground)" radius={[3, 3, 0, 0]} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[3, 3, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-sm">Location (D4)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Location (D4)</CardTitle></CardHeader>
           <CardContent className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -139,15 +139,15 @@ export default function DemographicsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-sm">Session lengths (D6)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Session lengths (D6)</CardTitle></CardHeader>
           <CardContent className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={charts.d6}>
                 <XAxis dataKey="name" fontSize={10} tickLine={false} />
                 <YAxis type="number" fontSize={10} tickLine={false} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
-                <Bar dataKey="value" fill="var(--foreground)" radius={[3, 3, 0, 0]} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[3, 3, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>

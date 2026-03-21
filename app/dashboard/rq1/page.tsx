@@ -9,7 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { HelpCircle } from "lucide-react"
 
 const COLORS2 = [
-  'var(--foreground)',
+  'var(--color-primary)',
   'var(--primary)',
   'var(--muted-foreground)',
   'var(--accent-foreground)',
@@ -97,8 +97,8 @@ export default function Rq1Page() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-lg">Workflow Distribution (Q2)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Workflow Distribution (Q2)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -112,30 +112,30 @@ export default function Rq1Page() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-lg">Daily Patient Capacity (D5)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Daily Patient Capacity (D5)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={patientsData}>
                 <XAxis dataKey="name" fontSize={12} tickLine={false} />
                 <YAxis type="number" fontSize={11} tickLine={false} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
-                <Bar dataKey="value" fill="var(--foreground)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
 
-      <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-        <CardHeader><CardTitle className="text-lg">Mental Tiredness Burden (Q_mental_tire)</CardTitle></CardHeader>
+      <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <CardHeader><CardTitle className="text-sm font-semibold">Mental Tiredness Burden (Q_mental_tire)</CardTitle></CardHeader>
         <CardContent className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={mentalTire} layout="vertical">
               <YAxis type="category" dataKey="name" fontSize={11} tickLine={false} axisLine={false} width={100} />
               <XAxis type="number" fontSize={11} tickLine={false} />
               <Tooltip cursor={{ fill: 'transparent' }} />
-              <Bar dataKey="value" fill="var(--foreground)" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="value" fill="var(--color-primary)" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>

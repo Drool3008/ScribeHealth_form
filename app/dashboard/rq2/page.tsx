@@ -88,44 +88,44 @@ export default function Rq2Page() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-lg">Tools Distribution (Q3)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Tools Distribution (Q3)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={toolsData} layout="vertical">
                 <YAxis type="category" dataKey="name" stroke="#888888" fontSize={11} tickLine={false} axisLine={false} width={100} />
                 <XAxis type="number" stroke="#888888" fontSize={11} tickLine={false} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
-                <Bar dataKey="value" fill="var(--foreground)" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-          <CardHeader><CardTitle className="text-lg">Satisfaction Distribution (Q4)</CardTitle></CardHeader>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader><CardTitle className="text-sm font-semibold">Satisfaction Distribution (Q4)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={satisfactionData}>
                 <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} />
                 <YAxis type="number" stroke="#888888" fontSize={11} tickLine={false} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
-                <Bar dataKey="value" fill="var(--foreground)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
 
-      <Card className="border shadow-sm hover:scale-[1.01] hover:shadow-md transition-all duration-300">
-        <CardHeader><CardTitle className="text-lg">Biggest Frustration Areas (Q5)</CardTitle></CardHeader>
+      <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <CardHeader><CardTitle className="text-sm font-semibold">Biggest Frustration Areas (Q5)</CardTitle></CardHeader>
         <CardContent className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={frustrationsData}>
               <XAxis dataKey="name" stroke="#888888" fontSize={11} tickLine={false} axisLine={false} />
               <YAxis type="number" stroke="#888888" fontSize={11} tickLine={false} />
               <Tooltip cursor={{ fill: 'transparent' }} />
-              <Bar dataKey="value" fill="var(--foreground)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="value" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
