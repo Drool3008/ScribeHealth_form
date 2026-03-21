@@ -27,6 +27,9 @@ jobs:
         run: npm install
       - name: Build with Next.js
         run: npx next build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://sscgnfofphzvvvauvodg.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "sb_publishable_ssps-Pt2LISokfxAkcDcUA_jD2ZqP4Y"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
