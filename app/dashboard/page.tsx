@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { AppSidebar } from "@/components/app-sidebar"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import { SiteHeader } from "@/components/site-header"
 import { SectionCards } from "@/components/section-cards"
 import { useSurveyData, SurveyResponse } from "@/lib/dashboard-helper"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -132,99 +129,93 @@ export default function Page() {
   if (loading) return <DashboardSkeleton />
 
   return (
-    <SidebarProvider style={{ "--sidebar-width": "calc(var(--spacing) * 64)", "--header-height": "calc(var(--spacing) * 12)" } as React.CSSProperties}>
-      <AppSidebar variant="inset" />
-      <SidebarInset>
-        <SiteHeader />
-        <div className="flex flex-1 flex-col py-4 md:gap-4 md:py-6">
-          <SectionCards metrics={metrics} />
+    <div className="flex flex-1 flex-col py-4 md:gap-4 md:py-6 animate-in fade-in duration-500">
+      <SectionCards metrics={metrics} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 lg:px-6 mt-4">
-            <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-sm font-semibold flex items-center gap-2"><Clock className="size-4 text-muted-foreground" /> Time & Effort</CardTitle>
-                  <Link href="/dashboard/rq1" className="text-xs text-primary hover:underline">Details</Link>
-                </div>
-                <CardDescription className="text-xs">Workflow splits across session points loaded flawlessly</CardDescription>
-              </CardHeader>
-              <CardContent className="h-60 mt-2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie data={charts.workflowSplit} cx="50%" cy="50%" innerRadius={45} outerRadius={65} dataKey="value" paddingAngle={2}>
-                      {charts.workflowSplit.map((_: any, index: any) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                    </Pie>
-                    <Tooltip />
-                    <Legend iconSize={8} wrapperStyle={{ fontSize: '10px' }} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 lg:px-6 mt-4">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader className="pb-2">
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-sm font-semibold flex items-center gap-2"><Clock className="size-4 text-muted-foreground" /> Time & Effort</CardTitle>
+              <Link href="/dashboard/rq1" className="text-xs text-primary hover:underline">Details</Link>
+            </div>
+            <CardDescription className="text-xs">Workflow splits across session points loaded flawlessly</CardDescription>
+          </CardHeader>
+          <CardContent className="h-60 mt-2">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie data={charts.workflowSplit} cx="50%" cy="50%" innerRadius={45} outerRadius={65} dataKey="value" paddingAngle={2}>
+                  {charts.workflowSplit.map((_: any, index: any) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend iconSize={8} wrapperStyle={{ fontSize: '10px' }} />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
 
-            <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-sm font-semibold flex items-center gap-2"><Smile className="size-4 text-muted-foreground" /> Tool Fragmentation</CardTitle>
-                  <Link href="/dashboard/rq2" className="text-xs text-primary hover:underline">Details</Link>
-                </div>
-                <CardDescription className="text-xs">Frag Score: {metrics.toolsFragScore.toFixed(1)} tools/user</CardDescription>
-              </CardHeader>
-              <CardContent className="h-60 mt-2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={charts.painDistribution} layout="vertical">
-                    <YAxis type="category" dataKey="name" fontSize={10} tickLine={false} axisLine={false} width={80} />
-                    <XAxis type="number" fontSize={10} tickLine={false} />
-                    <Tooltip cursor={{ fill: 'transparent' }} />
-                    <Bar dataKey="value" fill="var(--color-primary)" radius={[0, 4, 4, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </div>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader className="pb-2">
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-sm font-semibold flex items-center gap-2"><Smile className="size-4 text-muted-foreground" /> Tool Fragmentation</CardTitle>
+              <Link href="/dashboard/rq2" className="text-xs text-primary hover:underline">Details</Link>
+            </div>
+            <CardDescription className="text-xs">Frag Score: {metrics.toolsFragScore.toFixed(1)} tools/user</CardDescription>
+          </CardHeader>
+          <CardContent className="h-60 mt-2">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={charts.painDistribution} layout="vertical">
+                <YAxis type="category" dataKey="name" fontSize={10} tickLine={false} axisLine={false} width={80} />
+                <XAxis type="number" fontSize={10} tickLine={false} />
+                <Tooltip cursor={{ fill: 'transparent' }} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 lg:px-6 mt-2">
-            <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-sm font-semibold flex items-center gap-2"><Zap className="size-4 text-muted-foreground" /> AI Trust</CardTitle>
-                  <Link href="/dashboard/rq3" className="text-xs text-primary hover:underline">Details</Link>
-                </div>
-                <CardDescription className="text-xs">{metrics.aiAdoptionScore.toFixed(0)}% are open to automated drafting nodes flawlessly loaded</CardDescription>
-              </CardHeader>
-              <CardContent className="h-60 mt-2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={charts.concernFrequency}>
-                    <XAxis dataKey="name" fontSize={10} tickLine={false} />
-                    <YAxis type="number" fontSize={10} tickLine={false} />
-                    <Tooltip cursor={{ fill: 'transparent' }} />
-                    <Bar dataKey="value" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 lg:px-6 mt-2">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader className="pb-2">
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-sm font-semibold flex items-center gap-2"><Zap className="size-4 text-muted-foreground" /> AI Trust</CardTitle>
+              <Link href="/dashboard/rq3" className="text-xs text-primary hover:underline">Details</Link>
+            </div>
+            <CardDescription className="text-xs">{metrics.aiAdoptionScore.toFixed(0)}% are open to automated drafting nodes flawlessly loaded</CardDescription>
+          </CardHeader>
+          <CardContent className="h-60 mt-2">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={charts.concernFrequency}>
+                <XAxis dataKey="name" fontSize={10} tickLine={false} />
+                <YAxis type="number" fontSize={10} tickLine={false} />
+                <Tooltip cursor={{ fill: 'transparent' }} />
+                <Bar dataKey="value" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
 
-            <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-sm font-semibold flex items-center gap-2"><Languages className="size-4 text-muted-foreground" /> Multilingual Friction</CardTitle>
-                  <Link href="/dashboard/rq4" className="text-xs text-primary hover:underline">Details</Link>
-                </div>
-                <CardDescription className="text-xs">Friction Index Impact triggers loaded flawlessly</CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-col justify-center gap-4 px-4 h-60">
-                <div className="space-y-1">
-                  <div className="flex justify-between text-xs font-medium"><span>Ideal Translation Burden index</span><span>{metrics.translationBurden.toFixed(0)}%</span></div>
-                  <Progress value={metrics.translationBurden} className="h-1.5" />
-                </div>
-                <div className="p-3 bg-primary/5 rounded-xl border border-primary/20">
-                  <span className="text-xs font-bold text-foreground">💡 Key Rule Threshold</span><br />
-                  <span className="text-[11px] text-muted-foreground">If translating mentally burden hits &gt;50%, multilingual assistance UX guarantees localized edge buffers!</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+          <CardHeader className="pb-2">
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-sm font-semibold flex items-center gap-2"><Languages className="size-4 text-muted-foreground" /> Multilingual Friction</CardTitle>
+              <Link href="/dashboard/rq4" className="text-xs text-primary hover:underline">Details</Link>
+            </div>
+            <CardDescription className="text-xs">Friction Index Impact triggers loaded flawlessly</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col justify-center gap-4 px-4 h-60">
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs font-medium"><span>Ideal Translation Burden index</span><span>{metrics.translationBurden.toFixed(0)}%</span></div>
+              <Progress value={metrics.translationBurden} className="h-1.5" />
+            </div>
+            <div className="p-3 bg-primary/5 rounded-xl border border-primary/20">
+              <span className="text-xs font-bold text-foreground">💡 Key Rule Threshold</span><br />
+              <span className="text-[11px] text-muted-foreground">If translating mentally burden hits &gt;50%, multilingual assistance UX guarantees localized edge buffers!</span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   )
 }

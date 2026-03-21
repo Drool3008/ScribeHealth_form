@@ -1,48 +1,18 @@
 import * as React from "react"
-import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
-import { Users, Clock, Smile, Zap, Languages, TrendingUp, FileText, ClipboardList } from "lucide-react"
-
-const navItems = [
-  { name: "Overview Scorecard", href: "/dashboard", icon: ClipboardList },
-  { name: "Demographics", href: "/dashboard/demographics", icon: Users },
-  { name: "Time & Effort (RQ1)", href: "/dashboard/rq1", icon: Clock },
-  { name: "Tools & Pain (RQ2)", href: "/dashboard/rq2", icon: Smile },
-  { name: "AI Trust (RQ3)", href: "/dashboard/rq3", icon: Zap },
-  { name: "Multilingual (RQ4)", href: "/dashboard/rq4", icon: Languages },
-  { name: "Workflow (RQ5)", href: "/dashboard/rq5", icon: TrendingUp },
-  { name: "Interview Transcripts", href: "/dashboard/transcripts", icon: FileText },
-  { name: "Research Report (2.4)", href: "/dashboard/report", icon: ClipboardList },
-]
+import { AppSidebar } from "@/components/app-sidebar"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { SiteHeader } from "@/components/site-header"
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-background/95">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-border/40 p-5 flex flex-col gap-5 bg-card flex-none">
-        <div className="flex flex-col gap-0.5">
-          <h2 className="text-lg font-bold tracking-tight text-foreground">ScribeHealth</h2>
-          <span className="text-xs text-muted-foreground font-medium">Research Insights Dashboard</span>
+    <SidebarProvider style={{ "--sidebar-width": "calc(var(--spacing) * 64)", "--header-height": "calc(var(--spacing) * 12)" } as React.CSSProperties}>
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <SiteHeader />
+        <div className="flex flex-1 flex-col">
+          {children}
         </div>
-        <Separator className="bg-border/50" />
-        <nav className="flex flex-col gap-1 flex-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-all duration-150 active:scale-[0.98]"
-            >
-              <item.icon className="size-[18px]" />
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-
-      {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto">
-        {children}
-      </main>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
