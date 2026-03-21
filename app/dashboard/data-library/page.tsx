@@ -68,8 +68,8 @@ export default function DataLibraryPage() {
   }
 
   return (
-    <div className="py-4 space-y-6 px-4 lg:px-6 animate-in fade-in duration-500">
-      <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+    <div className="py-4 space-y-4 px-4 lg:px-6 animate-in fade-in duration-500 w-full max-w-full overflow-hidden">
+      <Card className="border shadow-none hover:shadow-sm transition-all duration-300 w-full max-w-full overflow-hidden">
         <CardHeader className="pb-3 border-b">
           <CardTitle className="text-sm font-semibold flex items-center justify-between">
             <span>Unified Spreadsheet View ({dbData.length} records)</span>
