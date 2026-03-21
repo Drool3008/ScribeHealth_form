@@ -82,6 +82,14 @@ const data = {
         <Github className="size-4" />
       ),
     },
+    {
+      name: "Live Survey Form",
+      url: "/",
+      icon: (
+        <FileTextIcon />
+      ),
+      tooltip: "This is a survey which was taken from the doctors and this is the dashboard where all the data is analysed."
+    },
   ],
 }
 

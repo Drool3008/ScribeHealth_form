@@ -27,6 +27,7 @@ export function NavDocuments({
     name: string
     url: string
     icon: React.ReactNode
+    tooltip?: string
   }[]
 }) {
   const { isMobile } = useSidebar()
@@ -37,7 +38,7 @@ export function NavDocuments({
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild tooltip={item.tooltip}>
               <Link href={item.url}>
                 {item.icon}
                 <span>{item.name}</span>
