@@ -327,7 +327,7 @@ export default function SurveyForm() {
 
   if (!hasConsented) {
     return (
-      <div className="min-h-svh w-full flex items-center justify-center p-4">
+      <div className="survey-container min-h-svh w-full flex items-center justify-center p-4">
         <Card className="max-w-xl border-none shadow-none bg-transparent animate-fade-in-up">
           <CardHeader className="px-0 pt-0 pb-2">
             <CardTitle className="text-2xl font-bold tracking-tight text-foreground">🩺 Understanding Doctor Workflows</CardTitle>
@@ -401,7 +401,7 @@ export default function SurveyForm() {
   }
 
   return (
-    <div className="h-dvh w-full max-w-2xl mx-auto flex flex-col pt-6 px-4 animate-fade-in-up overflow-hidden relative">
+    <div className="survey-container h-dvh w-full max-w-2xl mx-auto flex flex-col pt-6 px-4 animate-fade-in-up overflow-hidden relative">
       <div className="space-y-1 pb-4 flex-none">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">{surveyData.survey_title}</h1>
       </div>
