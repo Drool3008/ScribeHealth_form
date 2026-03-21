@@ -432,8 +432,8 @@ export default function SurveyForm() {
                       <div
                         key={option}
                         className={cn(
-                          "flex items-center space-x-3 bg-muted/35 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99]",
-                          answers[q.id] === option && "bg-primary/10 font-bold"
+                          "flex items-center space-x-3 py-3 border-b border-border/50 last:border-b-0 cursor-pointer transition-colors hover:bg-muted/5 px-2",
+                          answers[q.id] === option && "font-bold text-primary"
                         )}
                         onClick={() => handleSingleSelect(q.id, option)}
                       >
@@ -455,8 +455,8 @@ export default function SurveyForm() {
                       <div
                         key={option}
                         className={cn(
-                          "flex items-center space-x-3 bg-muted/35 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99]",
-                          answers[q.id]?.includes(option) && "bg-primary/10 font-bold"
+                          "flex items-center space-x-3 py-3 border-b border-border/50 last:border-b-0 cursor-pointer transition-colors hover:bg-muted/5 px-2",
+                          answers[q.id]?.includes(option) && "font-bold text-primary"
                         )}
                         onClick={() =>
                           handleMultiSelect(q.id, option, !answers[q.id]?.includes(option))
