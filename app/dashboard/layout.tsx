@@ -1,15 +1,17 @@
 import * as React from "react"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
-import { Users, Clock, Smile, Zap, Languages, TrendingUp } from "lucide-react"
+import { Users, Clock, Smile, Zap, Languages, TrendingUp, FileText } from "lucide-react"
 
 const navItems = [
+  { name: "Overview Scorecard", href: "/dashboard", icon: FileText },
   { name: "Demographics", href: "/dashboard/demographics", icon: Users },
   { name: "Time & Effort (RQ1)", href: "/dashboard/rq1", icon: Clock },
   { name: "Tools & Pain (RQ2)", href: "/dashboard/rq2", icon: Smile },
   { name: "AI Trust (RQ3)", href: "/dashboard/rq3", icon: Zap },
   { name: "Multilingual (RQ4)", href: "/dashboard/rq4", icon: Languages },
   { name: "Workflow (RQ5)", href: "/dashboard/rq5", icon: TrendingUp },
+  { name: "Interview Transcripts", href: "/dashboard/transcripts", icon: FileText },
 ]
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
