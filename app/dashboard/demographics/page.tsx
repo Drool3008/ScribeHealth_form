@@ -73,12 +73,7 @@ export default function DemographicsPage() {
   if (loading) return <PageSkeleton />
 
   return (
-    <div className="p-6 space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">Demographics Summary</h1>
-        <p className="text-sm text-muted-foreground">Detailed profiling of survey participants specialist scopes and habits.</p>
-      </div>
-
+    <div className="py-4 space-y-6 animate-in fade-in duration-500 px-4 lg:px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
           <CardHeader><CardTitle className="text-sm font-semibold">Primary Specializations (D1)</CardTitle></CardHeader>

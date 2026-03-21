@@ -97,11 +97,8 @@ const transcripts = [
 
 export default function TranscriptsPage() {
   return (
-    <div className="p-6 space-y-6 animate-in fade-in duration-500 max-w-7xl mx-auto">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Doctor Interview Transcripts (Filtered)</h1>
-        <p className="text-sm text-muted-foreground">Qualitative diagnosis and profiling containing qualitative field interviews loaded successfully.</p>
-      </div>
+    <div className="py-4 space-y-6 px-4 lg:px-6 animate-in fade-in duration-500 max-w-7xl mx-auto">
+      
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <Card className="border p-4 hover:shadow-md transition-all duration-300">

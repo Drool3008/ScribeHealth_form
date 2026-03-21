@@ -71,11 +71,8 @@ export default function Rq1Page() {
   if (loading) return <PageSkeleton />
 
   return (
-    <div className="p-6 space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">RQ1: Time & Effort</h1>
-        <p className="text-sm text-muted-foreground">Detailed profiling of daily documentation time spend and After-hours burnout</p>
-      </div>
+    <div className="py-4 space-y-6 px-4 lg:px-6 animate-in fade-in duration-500">
+      
 
       <Alert className="bg-primary/5 border-primary/20 shadow-sm animate-in zoom-in duration-300">
         <HelpCircle className="size-5 text-primary" />

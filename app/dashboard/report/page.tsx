@@ -28,12 +28,8 @@ export default function ReportPage() {
   const totalResponders = dbData.length
 
   return (
-    <div className="p-6 space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2">
-          <ClipboardList className="size-6 text-primary" />
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">Section 2.4 - Report</h1>
-        </div>
+    <div className="py-4 space-y-6 px-4 lg:px-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
+      
         <p className="text-sm text-muted-foreground">Detailed profiling and structured Analysis dashboard framing conclusions optimally.</p>
       </div>
 
