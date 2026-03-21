@@ -68,7 +68,7 @@ export default function Rq3Page() {
       </Alert>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Comfort Using AI (Q6)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -83,7 +83,7 @@ export default function Rq3Page() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Concerns Frequency (Q7)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">

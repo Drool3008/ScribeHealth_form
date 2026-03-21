@@ -68,7 +68,7 @@ export default function Rq5Page() {
       </Alert>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Most Inefficient Stage (Q11)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -83,7 +83,7 @@ export default function Rq5Page() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Delayed or Missed Follow-ups (Q13)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -98,7 +98,7 @@ export default function Rq5Page() {
         </Card>
       </div>
 
-      <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+      <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
         <CardHeader><CardTitle className="text-sm font-semibold">Follow-up Communication Process (Q12)</CardTitle></CardHeader>
         <CardContent className="h-64">
           <ResponsiveContainer width="100%" height="100%">

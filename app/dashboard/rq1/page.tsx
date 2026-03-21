@@ -94,7 +94,7 @@ export default function Rq1Page() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Workflow Distribution (Q2)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -109,7 +109,7 @@ export default function Rq1Page() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Daily Patient Capacity (D5)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -124,7 +124,7 @@ export default function Rq1Page() {
         </Card>
       </div>
 
-      <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+      <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
         <CardHeader><CardTitle className="text-sm font-semibold">Mental Tiredness Burden (Q_mental_tire)</CardTitle></CardHeader>
         <CardContent className="h-64">
           <ResponsiveContainer width="100%" height="100%">

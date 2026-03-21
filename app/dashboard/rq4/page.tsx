@@ -72,7 +72,7 @@ export default function Rq4Page() {
       </Alert>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Mental Translation Strain (Q9)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -87,7 +87,7 @@ export default function Rq4Page() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Slower / Harder metrics (Q10)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -102,7 +102,7 @@ export default function Rq4Page() {
         </Card>
       </div>
 
-      <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+      <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
         <CardHeader><CardTitle className="text-sm font-semibold">Patient Communication Languages (Q8)</CardTitle></CardHeader>
         <CardContent className="h-64">
           <ResponsiveContainer width="100%" height="100%">

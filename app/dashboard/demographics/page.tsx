@@ -75,7 +75,7 @@ export default function DemographicsPage() {
   return (
     <div className="py-4 space-y-6 animate-in fade-in duration-500 px-4 lg:px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Primary Specializations (D1)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -90,7 +90,7 @@ export default function DemographicsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Primary Workplaces (D3)</CardTitle></CardHeader>
           <CardContent className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -106,7 +106,7 @@ export default function DemographicsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Experience (D2)</CardTitle></CardHeader>
           <CardContent className="h-56">
             <ResponsiveContainer width="100%" height="100%">
@@ -120,7 +120,7 @@ export default function DemographicsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Location (D4)</CardTitle></CardHeader>
           <CardContent className="h-56">
             <ResponsiveContainer width="100%" height="100%">
@@ -134,7 +134,7 @@ export default function DemographicsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
+        <Card className="border shadow-none hover:shadow-sm transition-all duration-300 bg-gradient-to-t from-primary/5 to-card @container/card">
           <CardHeader><CardTitle className="text-sm font-semibold">Session lengths (D6)</CardTitle></CardHeader>
           <CardContent className="h-56">
             <ResponsiveContainer width="100%" height="100%">
