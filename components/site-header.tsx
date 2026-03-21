@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { Heart } from "lucide-react"
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -30,6 +31,10 @@ export function SiteHeader() {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
         <h1 className="text-base font-medium">{getPageTitle(pathname)}</h1>
+
+        <div className="ml-auto flex items-center gap-1.5 px-2 text-xs text-muted-foreground font-medium selection:text-none">
+          Developed by <span className="text-foreground font-semibold">Team Nomads</span> with <Heart className="size-3.5 text-red-500 fill-red-500 animate-pulse" />
+        </div>
       </div>
     </header>
   )
