@@ -39,7 +39,7 @@ export default function Rq5Page() {
     const followupCounts: Record<string, number> = {}
     const missedCounts: Record<string, number> = {}
 
-    const finalData = dbResponses.length > 0 ? dbResponses : dummyResponses
+    const finalData = dbResponses
 
     finalData.forEach(r => {
       const a = r.answers || {}

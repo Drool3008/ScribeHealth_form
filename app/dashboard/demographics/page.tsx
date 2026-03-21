@@ -42,7 +42,7 @@ export default function DemographicsPage() {
     const d8Counts: Record<string, number> = {}
     const d9Counts: Record<string, number> = {}
 
-    const finalData = dbResponses.length > 0 ? dbResponses : dummyResponses
+    const finalData = dbResponses
 
     finalData.forEach(r => {
       const a = r.answers || {}

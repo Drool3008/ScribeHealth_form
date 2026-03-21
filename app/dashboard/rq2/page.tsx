@@ -35,7 +35,7 @@ export default function Rq2Page() {
     let totalSat = 0
     let docsWithSat = 0
 
-    const finalData = dbResponses.length > 0 ? dbResponses : dummyResponses
+    const finalData = dbResponses
 
     finalData.forEach(r => {
       const a = r.answers || {}

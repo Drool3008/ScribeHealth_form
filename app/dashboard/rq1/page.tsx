@@ -38,7 +38,7 @@ export default function Rq1Page() {
   React.useEffect(() => {
     if (loading) return
 
-    const finalData = dbResponses.length > 0 ? dbResponses : dummyResponses
+    const finalData = dbResponses
     let totalDocs = finalData.length
     let totalDailyTime = 0
     let afterHoursCount = 0

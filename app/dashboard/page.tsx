@@ -75,7 +75,7 @@ export default function DashboardPage() {
   React.useEffect(() => {
     if (loading) return
 
-    const finalData = dbData.length > 0 ? dbData : dummyResponses
+    const finalData = dbData
     aggregateMetrics(finalData)
   }, [dbData, loading])
 

@@ -409,122 +409,122 @@ export default function SurveyForm() {
       <div className="flex-1 overflow-y-auto pb-32 p-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <Card className="border-none shadow-none bg-transparent">
           <CardHeader className="px-0 pt-0 pb-2">
-          <CardTitle className="text-2xl font-bold tracking-tight text-foreground/90">
-            {currentSection.section_title}
-          </CardTitle>
-          <CardDescription className="text-base text-muted-foreground/85">Please answer the following questions honestly.</CardDescription>
-        </CardHeader>
-        <Separator className="bg-border/50" />
-        <CardContent className="px-0 py-6 flex flex-col gap-8">
-          {currentSection.questions.map((q) => (
-            <div key={q.id} className="flex flex-col gap-3 group">
-              <Label className="text-[17px] font-semibold leading-normal group-hover:text-foreground transition-colors">
-                {q.question}
-              </Label>
+            <CardTitle className="text-2xl font-bold tracking-tight text-foreground/90">
+              {currentSection.section_title}
+            </CardTitle>
+            <CardDescription className="text-base text-muted-foreground/85">Please answer the following questions honestly.</CardDescription>
+          </CardHeader>
+          <Separator className="bg-border/50" />
+          <CardContent className="px-0 py-6 flex flex-col gap-8">
+            {currentSection.questions.map((q) => (
+              <div key={q.id} className="flex flex-col gap-3 group">
+                <Label className="text-[17px] font-semibold leading-normal group-hover:text-foreground transition-colors">
+                  {q.question}
+                </Label>
 
-              {q.type === "single_select" && (
-                <RadioGroup
-                  value={answers[q.id] || ""}
-                  onValueChange={(val) => handleSingleSelect(q.id, val)}
-                  className="flex flex-col gap-2 pt-1"
-                >
-                  {q.options?.map((option) => (
-                    <div
-                      key={option}
-                      className={cn(
-                        "flex items-center space-x-3 border border-foreground/15 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer shadow-sm hover:scale-[1.01] hover:shadow-md hover:border-foreground/30 active:scale-[0.99]",
-                        answers[q.id] === option && "border-primary bg-primary/5 border-2 shadow-sm"
-                      )}
-                      onClick={() => handleSingleSelect(q.id, option)}
-                    >
-                      <RadioGroupItem value={option} id={`${q.id}-${option}`} className="size-[18px] pointer-events-none" />
-                      <Label
-                        htmlFor={`${q.id}-${option}`}
-                        className="flex-1 cursor-pointer font-medium text-[16px] text-foreground/90 pointer-events-none"
-                      >
-                        {option}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              )}
-
-              {q.type === "multi_select" && (
-                <div className="flex flex-col gap-2 pt-1">
-                  {q.options?.map((option) => (
-                    <div
-                      key={option}
-                      className={cn(
-                        "flex items-center space-x-3 border border-foreground/15 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer shadow-sm hover:scale-[1.01] hover:shadow-md hover:border-foreground/30 active:scale-[0.99]",
-                        answers[q.id]?.includes(option) && "border-primary bg-primary/5 border-2 shadow-sm"
-                      )}
-                      onClick={() =>
-                        handleMultiSelect(q.id, option, !answers[q.id]?.includes(option))
-                      }
-                    >
-                      <Checkbox
-                        id={`${q.id}-${option}`}
-                        className="size-[18px] pointer-events-none"
-                        checked={answers[q.id]?.includes(option)}
-                        onCheckedChange={(checked) =>
-                          handleMultiSelect(q.id, option, checked === true)
-                        }
-                      />
-                      <Label
-                        htmlFor={`${q.id}-${option}`}
-                        className="flex-1 cursor-pointer font-medium text-[16px] text-foreground/90 pointer-events-none"
-                      >
-                        {option}
-                      </Label>
-                    </div>
-                  ))}
-                  {answers[q.id]?.includes("Other") && q.id === "Q8" && (
-                    <Input
-                      className="mt-2 text-sm bg-transparent !ring-offset-0 border-border/30 h-9"
-                      placeholder="Specify other languages..."
-                      value={answers["Q8_other"] || ""}
-                      onChange={(e) => setAnswers(p => ({...p, Q8_other: e.target.value}))}
-                    />
-                  )}
-                </div>
-              )}
-
-              {q.type === "scale" && q.scale && (
-                <div className="pt-4 flex flex-col gap-4">
-                  <div className="flex justify-between text-xs text-muted-foreground px-1">
-                    <span>{q.scale.labels?.[0]}</span>
-                    <span>{q.scale.labels?.[1]}</span>
-                  </div>
-                  <Slider
-                    defaultValue={[answers[q.id] || q.scale.min]}
-                    max={q.scale.max}
-                    min={q.scale.min}
-                    step={1}
-                    className="cursor-pointer"
-                    onValueChange={(val) => handleScaleChange(q.id, val[0])}
-                  />
-                  <div className="flex justify-between px-1 font-mono text-xs">
-                    {Array.from({ length: q.scale.max - q.scale.min + 1 }).map((_, i) => (
-                      <span
-                        key={i}
+                {q.type === "single_select" && (
+                  <RadioGroup
+                    value={answers[q.id] || ""}
+                    onValueChange={(val) => handleSingleSelect(q.id, val)}
+                    className="flex flex-col gap-2 pt-1"
+                  >
+                    {q.options?.map((option) => (
+                      <div
+                        key={option}
                         className={cn(
-                          "cursor-pointer p-1 rounded transition-all",
-                          answers[q.id] === q.scale!.min + i
-                            ? "font-bold text-primary scale-110"
-                            : "text-muted-foreground/60"
+                          "flex items-center space-x-3 border border-foreground/15 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer shadow-sm hover:scale-[1.01] hover:shadow-md hover:border-foreground/30 active:scale-[0.99]",
+                          answers[q.id] === option && "border-primary bg-primary/5 border-2 shadow-sm"
                         )}
-                        onClick={() => handleScaleChange(q.id, q.scale!.min + i)}
+                        onClick={() => handleSingleSelect(q.id, option)}
                       >
-                        {q.scale!.min + i}
-                      </span>
+                        <RadioGroupItem value={option} id={`${q.id}-${option}`} className="size-[18px] pointer-events-none" />
+                        <Label
+                          htmlFor={`${q.id}-${option}`}
+                          className="flex-1 cursor-pointer font-medium text-[16px] text-foreground/90 pointer-events-none"
+                        >
+                          {option}
+                        </Label>
+                      </div>
                     ))}
+                  </RadioGroup>
+                )}
+
+                {q.type === "multi_select" && (
+                  <div className="flex flex-col gap-2 pt-1">
+                    {q.options?.map((option) => (
+                      <div
+                        key={option}
+                        className={cn(
+                          "flex items-center space-x-3 border border-foreground/15 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer shadow-sm hover:scale-[1.01] hover:shadow-md hover:border-foreground/30 active:scale-[0.99]",
+                          answers[q.id]?.includes(option) && "border-primary bg-primary/5 border-2 shadow-sm"
+                        )}
+                        onClick={() =>
+                          handleMultiSelect(q.id, option, !answers[q.id]?.includes(option))
+                        }
+                      >
+                        <Checkbox
+                          id={`${q.id}-${option}`}
+                          className="size-[18px] pointer-events-none"
+                          checked={answers[q.id]?.includes(option)}
+                          onCheckedChange={(checked) =>
+                            handleMultiSelect(q.id, option, checked === true)
+                          }
+                        />
+                        <Label
+                          htmlFor={`${q.id}-${option}`}
+                          className="flex-1 cursor-pointer font-medium text-[16px] text-foreground/90 pointer-events-none"
+                        >
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                    {answers[q.id]?.includes("Other") && q.id === "Q8" && (
+                      <Input
+                        className="mt-2 text-sm bg-transparent !ring-offset-0 border-border/30 h-9"
+                        placeholder="Specify other languages..."
+                        value={answers["Q8_other"] || ""}
+                        onChange={(e) => setAnswers(p => ({ ...p, Q8_other: e.target.value }))}
+                      />
+                    )}
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+                )}
+
+                {q.type === "scale" && q.scale && (
+                  <div className="pt-4 flex flex-col gap-4">
+                    <div className="flex justify-between text-xs text-muted-foreground px-1">
+                      <span>{q.scale.labels?.[0]}</span>
+                      <span>{q.scale.labels?.[1]}</span>
+                    </div>
+                    <Slider
+                      defaultValue={[answers[q.id] || q.scale.min]}
+                      max={q.scale.max}
+                      min={q.scale.min}
+                      step={1}
+                      className="cursor-pointer"
+                      onValueChange={(val) => handleScaleChange(q.id, val[0])}
+                    />
+                    <div className="flex justify-between px-1 font-mono text-xs">
+                      {Array.from({ length: q.scale.max - q.scale.min + 1 }).map((_, i) => (
+                        <span
+                          key={i}
+                          className={cn(
+                            "cursor-pointer p-1 rounded transition-all",
+                            answers[q.id] === q.scale!.min + i
+                              ? "font-bold text-primary scale-110"
+                              : "text-muted-foreground/60"
+                          )}
+                          onClick={() => handleScaleChange(q.id, q.scale!.min + i)}
+                        >
+                          {q.scale!.min + i}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </CardContent>
+        </Card>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 z-20 flex flex-col items-center">

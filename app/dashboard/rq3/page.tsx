@@ -37,7 +37,7 @@ export default function Rq3Page() {
     const comfortCounts: Record<string, number> = {}
     const concernsCounts: Record<string, number> = {}
 
-    const finalData = dbResponses.length > 0 ? dbResponses : dummyResponses
+    const finalData = dbResponses
 
     finalData.forEach(r => {
       const a = r.answers || {}

@@ -39,7 +39,7 @@ export default function Rq4Page() {
     const translateCounts: Record<string, number> = {}
     const burdenCounts: Record<string, number> = {}
 
-    const finalData = dbResponses.length > 0 ? dbResponses : dummyResponses
+    const finalData = dbResponses
 
     finalData.forEach(r => {
       const a = r.answers || {}
