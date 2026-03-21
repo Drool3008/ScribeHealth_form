@@ -22,24 +22,49 @@ export default function DataLibraryPage() {
     if (dbData.length === 0) {
       return (
         <TableRow>
-          <TableCell colSpan={7} className="h-24 text-center text-muted-foreground text-sm">
+          <TableCell colSpan={23} className="h-24 text-center text-muted-foreground text-sm">
             No raw survey data fetched or stored.
           </TableCell>
         </TableRow>
       )
     }
 
-    return dbData.map((r, index) => (
-      <TableRow key={r.id || index} className="hover:bg-muted/30">
-        <TableCell className="text-center text-xs text-muted-foreground font-medium">{index + 1}</TableCell>
-        <TableCell className="text-sm text-foreground">{(r.answers as any)?.D1 || "N/A"}</TableCell>
-        <TableCell className="text-sm text-foreground">{(r.answers as any)?.D5 || "N/A"}</TableCell>
-        <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q1 || "N/A"}</TableCell>
-        <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q2 || "N/A"}</TableCell>
-        <TableCell className="text-sm text-foreground">{(r.answers as any)?.Q4 || "N/A"}/5</TableCell>
-        <TableCell className="text-sm text-muted-foreground">{(r.answers as any)?.Q5 || "N/A"}</TableCell>
-      </TableRow>
-    ))
+    return dbData.map((r, index) => {
+      const a = (r.answers || {}) as any
+      const formatVal = (val: any) => {
+        if (Array.isArray(val)) return val.join(", ")
+        return val || "N/A"
+      }
+
+      return (
+        <TableRow key={r.id || index} className="hover:bg-muted/30 whitespace-nowrap">
+          <TableCell className="text-center text-xs text-muted-foreground font-medium">{index + 1}</TableCell>
+          <TableCell className="text-xs text-foreground font-medium">{formatVal(a.D1)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.D2)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.D3)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.D4)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.D6)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.D7)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.D8)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.D9)}</TableCell>
+          <TableCell className="text-xs font-semibold text-primary">{formatVal(a.D5)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q1)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q2)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q_mental_tire)}</TableCell>
+          <TableCell className="text-xs max-w-[150px] truncate" title={formatVal(a.Q3)}>{formatVal(a.Q3)}</TableCell>
+          <TableCell className="text-xs text-center font-bold">{formatVal(a.Q4)}/5</TableCell>
+          <TableCell className="text-xs max-w-[150px] truncate" title={formatVal(a.Q5)}>{formatVal(a.Q5)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q6)}</TableCell>
+          <TableCell className="text-xs max-w-[120px] truncate" title={formatVal(a.Q7)}>{formatVal(a.Q7)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q8)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q9)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q10)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q11)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q12)}</TableCell>
+          <TableCell className="text-xs">{formatVal(a.Q13)}</TableCell>
+        </TableRow>
+      )
+    })
   }
 
   return (
@@ -47,22 +72,39 @@ export default function DataLibraryPage() {
       <Card className="border shadow-none hover:shadow-sm transition-all duration-300">
         <CardHeader className="pb-3 border-b">
           <CardTitle className="text-sm font-semibold flex items-center justify-between">
-            <span>Raw Survey Responses ({dbData.length} records)</span>
-            <span className="text-[11px] text-muted-foreground font-normal">Sourcing real-time Supabase aggregate grid nodes</span>
+            <span>Unified Spreadsheet View ({dbData.length} records)</span>
+            <span className="text-[11px] text-muted-foreground font-normal">Scroll horizontally to view absolute question aggregates flawlessly</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader className="bg-muted/50">
-                <TableRow>
+              <TableHeader className="bg-muted/50 border-b">
+                <TableRow className="whitespace-nowrap">
                   <TableHead className="w-12 text-center text-xs">#</TableHead>
-                  <TableHead className="text-xs font-semibold">Specialty (D1)</TableHead>
-                  <TableHead className="text-xs font-semibold">Patients/day (D5)</TableHead>
-                  <TableHead className="text-xs font-semibold">Time/patient (Q1)</TableHead>
-                  <TableHead className="text-xs font-semibold">After-hours (Q2)</TableHead>
-                  <TableHead className="text-xs font-semibold">Satisfaction (Q4)</TableHead>
-                  <TableHead className="text-xs font-semibold">Core Pain (Q5)</TableHead>
+                  <TableHead className="text-xs font-bold text-foreground">Specialty (D1)</TableHead>
+                  <TableHead className="text-xs font-semibold">Exp (D2)</TableHead>
+                  <TableHead className="text-xs font-semibold">Workplace (D3)</TableHead>
+                  <TableHead className="text-xs font-semibold">Location (D4)</TableHead>
+                  <TableHead className="text-xs font-semibold">Consult style (D6)</TableHead>
+                  <TableHead className="text-xs font-semibold">Required? (D7)</TableHead>
+                  <TableHead className="text-xs font-semibold">Tech Comfort (D8)</TableHead>
+                  <TableHead className="text-xs font-semibold">Device (D9)</TableHead>
+                  <TableHead className="text-xs font-bold text-primary">Patients/D (D5)</TableHead>
+                  <TableHead className="text-xs font-semibold">Time/P (Q1)</TableHead>
+                  <TableHead className="text-xs font-semibold">Timing (Q2)</TableHead>
+                  <TableHead className="text-xs font-semibold">Ment Tire (Q_mental)</TableHead>
+                  <TableHead className="text-xs font-semibold">Tools (Q3)</TableHead>
+                  <TableHead className="text-xs font-semibold text-center">Satisfaction (Q4)</TableHead>
+                  <TableHead className="text-xs font-semibold">Pain Point (Q5)</TableHead>
+                  <TableHead className="text-xs font-semibold">AI Comfort (Q6)</TableHead>
+                  <TableHead className="text-xs font-semibold">Concerns (Q7)</TableHead>
+                  <TableHead className="text-xs font-semibold">Languages (Q8)</TableHead>
+                  <TableHead className="text-xs font-semibold">Mental Translate (Q9)</TableHead>
+                  <TableHead className="text-xs font-semibold">Slower? (Q10)</TableHead>
+                  <TableHead className="text-xs font-semibold">Inefficient? (Q11)</TableHead>
+                  <TableHead className="text-xs font-semibold">Follow-ups (Q12)</TableHead>
+                  <TableHead className="text-xs font-semibold">Delays (Q13)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
