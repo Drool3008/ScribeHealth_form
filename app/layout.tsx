@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const geistHeading = Geist({subsets:['latin'],variable:'--font-heading'});
 
-const geistSans = Geist({subsets:['latin'],variable:'--font-sans'})
+const geist = Geist({subsets:['latin'],variable:'--font-sans'})
 
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geistSans.variable, geistHeading.variable)}
+      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable, geistHeading.variable)}
     >
       <body>
         <ThemeProvider forcedTheme="light">
