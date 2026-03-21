@@ -358,7 +358,7 @@ export default function SurveyForm() {
 
             <div className="space-y-3">
               <h3 className="text-[17px] font-bold flex items-center gap-1.5 text-foreground">✅ Consent</h3>
-              <div className="flex items-start space-x-3 border border-foreground/15 rounded-xl p-4 hover:bg-muted/50 transition-colors cursor-pointer shadow-sm hover:scale-[1.01] hover:border-foreground/30 active:scale-[0.99]" onClick={() => setCheckboxConsented(!checkboxConsented)}>
+              <div className="flex items-start space-x-3 bg-muted/40 rounded-xl p-5 hover:bg-muted/60 transition-all cursor-pointer shadow-none hover:scale-[1.01] active:scale-[0.99]" onClick={() => setCheckboxConsented(!checkboxConsented)}>
                 <Checkbox id="consent" className="size-[18px] pointer-events-none" checked={checkboxConsented} onCheckedChange={(c) => setCheckboxConsented(c === true)} />
                 <div className="grid gap-1.5 leading-none">
                   <p className="text-base font-medium text-foreground/90">I acknowledge that:</p>
@@ -432,8 +432,8 @@ export default function SurveyForm() {
                       <div
                         key={option}
                         className={cn(
-                          "flex items-center space-x-3 border border-foreground/15 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer shadow-sm hover:scale-[1.01] hover:shadow-md hover:border-foreground/30 active:scale-[0.99]",
-                          answers[q.id] === option && "border-primary bg-primary/5 border-2 shadow-sm"
+                          "flex items-center space-x-3 bg-muted/35 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99]",
+                          answers[q.id] === option && "bg-primary/10 font-bold"
                         )}
                         onClick={() => handleSingleSelect(q.id, option)}
                       >
@@ -455,8 +455,8 @@ export default function SurveyForm() {
                       <div
                         key={option}
                         className={cn(
-                          "flex items-center space-x-3 border border-foreground/15 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer shadow-sm hover:scale-[1.01] hover:shadow-md hover:border-foreground/30 active:scale-[0.99]",
-                          answers[q.id]?.includes(option) && "border-primary bg-primary/5 border-2 shadow-sm"
+                          "flex items-center space-x-3 bg-muted/35 rounded-xl p-4 hover:bg-muted/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99]",
+                          answers[q.id]?.includes(option) && "bg-primary/10 font-bold"
                         )}
                         onClick={() =>
                           handleMultiSelect(q.id, option, !answers[q.id]?.includes(option))
@@ -503,7 +503,7 @@ export default function SurveyForm() {
                       className="cursor-pointer"
                       onValueChange={(val) => handleScaleChange(q.id, val[0])}
                     />
-                    <div className="flex justify-between px-1 font-mono text-xs">
+                    <div className="flex justify-between px-1 font-sans text-xs">
                       {Array.from({ length: q.scale.max - q.scale.min + 1 }).map((_, i) => (
                         <span
                           key={i}

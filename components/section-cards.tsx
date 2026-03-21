@@ -21,7 +21,7 @@ export function SectionCards({ metrics }: { metrics: any }) {
             {metrics.aiAdoptionScore.toFixed(0)}%
           </CardTitle>
           <CardAction>
-            <Badge variant="outline" className={metrics.aiAdoptionScore > 50 ? 'border-emerald-500 text-emerald-500' : 'border-amber-500 text-amber-500'}>
+            <Badge variant="outline" className="border-foreground/30 text-foreground/80">
               {metrics.aiAdoptionScore > 50 ? 'YES' : 'MAYBE'}
             </Badge>
           </CardAction>
@@ -29,7 +29,7 @@ export function SectionCards({ metrics }: { metrics: any }) {
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
             Open to automation assist nodes{" "}
-            <TrendingUpIcon className="size-4 text-emerald-500" />
+            <TrendingUpIcon className="size-4 text-muted-foreground" />
           </div>
           <div className="text-muted-foreground">
             {metrics.totalDocs} Doctors loaded polled flawlessly
@@ -66,13 +66,13 @@ export function SectionCards({ metrics }: { metrics: any }) {
             {(5 - metrics.avgSatisfaction).toFixed(1)}
           </CardTitle>
           <CardAction>
-            <Badge variant="outline" className="border-red-500 text-red-500">
+            <Badge variant="outline" className="border-foreground/30 text-foreground/80">
               High Friction
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium text-red-500">
+          <div className="line-clamp-1 flex gap-2 font-medium">
             Friction impact index{" "}
           </div>
           <div className="text-muted-foreground">Out of 5 maximum thresholds loaded loaded flawlessly</div>
@@ -86,13 +86,13 @@ export function SectionCards({ metrics }: { metrics: any }) {
             {metrics.afterHoursLoad.toFixed(0)}%
           </CardTitle>
           <CardAction>
-            <Badge variant="outline" className="border-destructive text-destructive">
+            <Badge variant="outline" className="border-foreground/30 text-foreground/80">
               Overload
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium text-destructive">
+          <div className="line-clamp-1 flex gap-2 font-medium">
             Workloads spill node{" "}
           </div>
           <div className="text-muted-foreground">Catching ups at night frequency loaded loaded flawlessly</div>
