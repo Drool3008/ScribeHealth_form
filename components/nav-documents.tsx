@@ -20,6 +20,8 @@ import { MoreHorizontalIcon, FolderIcon, ShareIcon, Trash2Icon } from "lucide-re
 
 import Link from "next/link"
 
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+
 export function NavDocuments({
   items,
 }: {
@@ -39,12 +41,23 @@ export function NavDocuments({
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild tooltip={item.tooltip}>
-              <Link href={item.url} target={item.newTab ? "_blank" : undefined}>
-                {item.icon}
-                <span>{item.name}</span>
-              </Link>
-            </SidebarMenuButton>
+            <TooltipProvider>
+              <Tooltip delayDuration={200}>
+                <TooltipTrigger asChild>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url} target={item.newTab ? "_blank" : undefined}>
+                      {item.icon}
+                      <span>{item.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </TooltipTrigger>
+                {item.tooltip && (
+                  <TooltipContent side="right" className="max-w-xs text-xs whitespace-normal">
+                    <p>{item.tooltip}</p>
+                  </TooltipContent>
+                )}
+              </Tooltip>
+            </TooltipProvider>
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
