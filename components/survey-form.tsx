@@ -297,10 +297,12 @@ export default function SurveyForm() {
   const goNext = async () => {
     if (currentSectionIndex < surveyData.sections.length - 1) {
       setCurrentSectionIndex(prev => prev + 1)
-      const scrollableDiv = document.querySelector('.overflow-y-auto')
-      if (scrollableDiv) {
-        scrollableDiv.scrollTo({ top: 0, behavior: "smooth" })
-      }
+      setTimeout(() => {
+        const scrollableDiv = document.querySelector('.overflow-y-auto')
+        if (scrollableDiv) {
+          scrollableDiv.scrollTo({ top: 0, behavior: "smooth" })
+        }
+      }, 50)
     } else {
       try {
         await supabase.from('survey_responses').insert({ answers })
@@ -314,7 +316,12 @@ export default function SurveyForm() {
   const goBack = () => {
     if (currentSectionIndex > 0) {
       setCurrentSectionIndex(prev => prev - 1)
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      setTimeout(() => {
+        const scrollableDiv = document.querySelector('.overflow-y-auto')
+        if (scrollableDiv) {
+          scrollableDiv.scrollTo({ top: 0, behavior: "smooth" })
+        }
+      }, 50)
     }
   }
 
