@@ -25,46 +25,75 @@ const data = {
   },
   navMain: [
     {
-      title: "Scorecard Overview",
-      url: "/dashboard",
-      icon: (
-        <LayoutDashboardIcon />
-      ),
+      title: "Business Model",
+      url: "/dashboard/business-model",
+      icon: <LayoutDashboardIcon />,
+      isActive: true,
+      items: [
+        {
+          title: "Pricing",
+          url: "/dashboard/business-model/pricing",
+        },
+        {
+          title: "Solo Doctors",
+          url: "/dashboard/business-model/solo-doctors",
+        },
+        {
+          title: "P&L",
+          url: "/dashboard/business-model/pnl",
+        },
+        {
+          title: "Balance Sheet",
+          url: "/dashboard/business-model/balance-sheet",
+        },
+        {
+          title: "Funding",
+          url: "/dashboard/business-model/funding",
+        },
+        {
+          title: "Cash Flow",
+          url: "/dashboard/business-model/cash-flow",
+        },
+        {
+          title: "LTV",
+          url: "/dashboard/business-model/ltv",
+        },
+        {
+          title: "G&A",
+          url: "/dashboard/business-model/ga",
+        },
+      ],
     },
     {
-      title: "Demographics",
-      url: "/dashboard/demographics",
-      icon: (
-        <UsersIcon />
-      ),
-    },
-    {
-      title: "Time & Effort (RQ1)",
-      url: "/dashboard/rq1",
-      icon: (
-        <FileChartColumnIcon />
-      ),
-    },
-    {
-      title: "Tools & Pain (RQ2)",
-      url: "/dashboard/rq2",
-      icon: (
-        <FileTextIcon />
-      ),
-    },
-    {
-      title: "Interview Transcripts",
-      url: "/dashboard/transcripts",
-      icon: (
-        <FileTextIcon />
-      ),
-    },
-    {
-      title: "Research Report (2.4)",
-      url: "/dashboard/report",
-      icon: (
-        <FileChartColumnIcon />
-      ),
+      title: "Research",
+      url: "/dashboard/research",
+      icon: <FolderIcon />,
+      items: [
+        {
+          title: "Scorecard Overview",
+          url: "/dashboard/research",
+        },
+        {
+          title: "Demographics",
+          url: "/dashboard/research/demographics",
+        },
+        {
+          title: "Time & Effort (RQ1)",
+          url: "/dashboard/research/rq1",
+        },
+        {
+          title: "Tools & Pain (RQ2)",
+          url: "/dashboard/research/rq2",
+        },
+        {
+          title: "Interview Transcripts",
+          url: "/dashboard/research/transcripts",
+        },
+        {
+          title: "Research Report (2.4)",
+          url: "/dashboard/research/report",
+        },
+      ],
     },
   ],
   documents: [
