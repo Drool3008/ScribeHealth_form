@@ -173,6 +173,59 @@
   }
 }
 
+@layer components {
+  /* ── Card: no ring / shadow — background contrast is sufficient ── */
+  [data-slot="card"] {
+    --tw-ring-shadow: none !important;
+    --tw-shadow: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    gap: 0 !important;
+  }
+
+  /* ── CardHeader: 16px padding, full-width border-b ──
+     Negative horizontal margin pulls the element flush to the card edge
+     so border-b spans the full card width ── */
+  [data-slot="card-header"] {
+    padding: 10px 16px !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: calc(100% + 32px) !important;
+  }
+
+  /* ── CardContent: 16px padding ── */
+  [data-slot="card-content"] {
+    padding: 16px !important;
+  }
+
+  /* If p-0 is set on CardContent (e.g. tables), respect it ── */
+  [data-slot="card-content"].p-0 {
+    padding: 0 !important;
+  }
+
+  /* ── CardFooter: flush + compact ── */
+  [data-slot="card-footer"] {
+    padding: 10px 16px !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    width: calc(100% + 32px) !important;
+  }
+
+  /* ── Tables always fill full card width ── */
+  [data-slot="card"] table {
+    width: 100%;
+  }
+
+  /* ── Tighter global spacing ── */
+  .space-y-8 > * + * { margin-top: 1.25rem !important; }
+  .space-y-10 > * + * { margin-top: 1.5rem !important; }
+  .space-y-6 > * + * { margin-top: 0.875rem !important; }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
