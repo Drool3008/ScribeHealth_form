@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ChevronRight, FileSpreadsheet, ExternalLink } from "lucide-react"
+import { ChevronRight, FileSpreadsheet } from "lucide-react"
 
 import {
   Collapsible,
@@ -58,16 +58,18 @@ export function NavMain({
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     {item.externalLink && (
-                      <a
-                        href={item.externalLink.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 mx-2 my-1 px-2 py-1.5 rounded-sm text-[11px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors group"
-                      >
-                        <FileSpreadsheet className="size-3.5 shrink-0 text-emerald-600" />
-                        <span className="truncate">{item.externalLink.label}</span>
-                        <ExternalLink className="size-3 ml-auto shrink-0 text-emerald-500 opacity-60 group-hover:opacity-100" />
-                      </a>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild>
+                          <a
+                            href={item.externalLink.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <FileSpreadsheet className="size-3.5 shrink-0" />
+                            <span>{item.externalLink.label}</span>
+                          </a>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
                     )}
                     <SidebarMenuSub>
                       {item.items.map((subItem) => (
