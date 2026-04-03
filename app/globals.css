@@ -5,38 +5,59 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --card: oklch(1 0 0);
+  /* ── Backgrounds ── */
+  --background: oklch(0.974 0.003 75);        /* #F7F6F5 warm off-white */
+  --foreground: oklch(0.145 0 0);
+
+  /* ── Cards / Popovers ── */
+  --card: oklch(1 0 0);                        /* #FFFFFF */
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
+
+  /* ── Primary ── */
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
+
+  /* ── Secondary (white button with E4E4E7 border) ── */
+  --secondary: oklch(1 0 0);                   /* #FFFFFF */
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
+
+  /* ── Muted ── */
+  --muted: oklch(0.974 0.003 75);              /* matches background */
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+
+  /* ── Accent — #976C39 warm amber-brown ── */
+  --accent: oklch(0.529 0.105 50.5);
+  --accent-foreground: oklch(1 0 0);           /* #FFFFFF */
+
+  /* ── Destructive ── */
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+
+  /* ── Borders / Inputs ── */
+  --border: oklch(0.916 0.002 264);            /* #E4E4E7 */
+  --input: oklch(0.916 0.002 264);             /* #E4E4E7 */
   --ring: oklch(0.708 0 0);
+
+  /* ── Charts ── */
   --chart-1: oklch(0.879 0.169 91.605);
   --chart-2: oklch(0.769 0.188 70.08);
   --chart-3: oklch(0.666 0.179 58.318);
   --chart-4: oklch(0.555 0.163 48.998);
   --chart-5: oklch(0.473 0.137 46.201);
+
+  /* ── Radius (sharp corners) ── */
   --radius: 0;
-  --sidebar: oklch(0.985 0 0);
+
+  /* ── Sidebar ── */
+  --sidebar: oklch(0.974 0.003 75);            /* #F7F6F5 */
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-border: oklch(0.916 0.002 264);    /* #E4E4E7 */
   --sidebar-ring: oklch(0.708 0 0);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
 }
 
 .dark {
@@ -52,8 +73,8 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.529 0.105 50.5);
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
@@ -74,8 +95,11 @@
 }
 
 @theme inline {
+  /* ── Fonts: Geist only, no mono ── */
   --font-sans: var(--font-sans);
-  --font-heading: var(--font-mono);
+  --font-mono: var(--font-sans);          /* override mono → Geist */
+  --font-heading: var(--font-sans);       /* was --font-mono, now Geist */
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -114,7 +138,6 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --font-mono: var(--font-mono);
 }
 
 @layer base {
@@ -122,14 +145,31 @@
     @apply border-border outline-ring/50;
   }
 
-
-
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
   }
 
   html {
     @apply font-sans;
+  }
+
+  /* ── Strip all italics / cursive globally ── */
+  em,
+  i,
+  .italic,
+  [class*="italic"] {
+    font-style: normal !important;
+  }
+
+  /* ── No mono font anywhere ── */
+  code,
+  kbd,
+  samp,
+  pre,
+  .font-mono,
+  [class*="font-mono"] {
+    font-family: var(--font-sans) !important;
   }
 }
 
