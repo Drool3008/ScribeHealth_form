@@ -102,6 +102,14 @@ const data = {
   ],
   documents: [
     {
+      name: "Challenge 2 (PDF)",
+      url: "https://drive.google.com/file/d/1QLj8avwMvzZrdG3ZP7TKf6d6Ye-CFlGT/view?usp=sharing",
+      icon: (
+        <FileChartColumnIcon />
+      ),
+      newTab: true,
+    },
+    {
       name: "Data Library",
       url: "/dashboard/data-library",
       icon: (
