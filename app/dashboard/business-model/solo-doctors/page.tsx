@@ -26,8 +26,9 @@ import { GuideTooltip } from "../guide-tooltip"
 const cn = (...classes: any[]) => classes.filter(Boolean).join(" ")
 
 import { useSearchParams, useRouter } from "next/navigation"
+import { Suspense } from "react"
 
-export default function SoloDoctorsPage() {
+function SoloDoctorsContent() {
   const [showGuide, setShowGuide] = React.useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -531,5 +532,13 @@ export default function SoloDoctorsPage() {
          ))}
       </div>
     </div>
+  )
+}
+
+export default function SoloDoctorsPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-sm text-muted-foreground">Loading...</div>}>
+      <SoloDoctorsContent />
+    </Suspense>
   )
 }

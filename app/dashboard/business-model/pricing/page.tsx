@@ -393,8 +393,9 @@ function PricingGrid({ plans }: { plans: Plan[] }) {
 }
 
 import { useSearchParams, useRouter } from "next/navigation"
+import { Suspense } from "react"
 
-export default function PricingPage() {
+function PricingContent() {
   const [showGuide, setShowGuide] = React.useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -483,5 +484,13 @@ export default function PricingPage() {
         </div>
       </div>
     </section>
+  )
+}
+
+export default function PricingPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-sm text-muted-foreground">Loading...</div>}>
+      <PricingContent />
+    </Suspense>
   )
 }

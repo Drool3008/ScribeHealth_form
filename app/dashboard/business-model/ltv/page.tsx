@@ -26,8 +26,9 @@ import { GuideTooltip } from "../guide-tooltip"
 const cn = (...classes: any[]) => classes.filter(Boolean).join(" ")
 
 import { useSearchParams, useRouter } from "next/navigation"
+import { Suspense } from "react"
 
-export default function LTVPage() {
+function LTVContent() {
   const [showGuide, setShowGuide] = React.useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -281,5 +282,13 @@ export default function LTVPage() {
          ))}
       </div>
     </div>
+  )
+}
+
+export default function LTVPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-sm text-muted-foreground">Loading...</div>}>
+      <LTVContent />
+    </Suspense>
   )
 }
