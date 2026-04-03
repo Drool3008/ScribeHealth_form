@@ -96,11 +96,35 @@ export function RiskClient({ riskId }: { riskId: string }) {
 
   if (riskId === "risk3") {
     return (
-      <div className="p-12 border border-dashed text-center space-y-4">
-        <ShieldAlert className="size-12 text-muted-foreground mx-auto opacity-20" />
-        <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Retention Decay Modeling In Progress</p>
-        <p className="text-xs text-muted-foreground">Scenario: 30% annual churn (stress case)</p>
-      </div>
+      <RiskContent 
+        riskTitle="Risk 3: Churn Increases (Retention Breakdown)"
+        riskDescription="Weakening retention leading to higher turnover and constant need for replacement acquisition"
+        metricLabel="Churn Rate (%)"
+        suffix="%"
+        baseValues={[20, 20, 20]}
+        stressValues={[30, 30, 30]}
+        failureScenarios={[
+          "Doctors try the product but do not continue usage",
+          "Competitors offer cheaper or simpler alternatives",
+          "Product experience is inconsistent or unreliable",
+          "Customer support debt builds as churn volume grows"
+        ]}
+        costRigidityPoints={[
+          "Acquisition effort must continue to replace lost users (LTV/CAC worsens)",
+          "CAC is already incurred upfront for the lost users",
+          "Growth becomes dependent on constant and expensive new acquisition"
+        ]}
+        ebitdaImpact="-0.4% in Year 2 (vs +2.1% in base case)"
+        impactNote="Retention drops turn narrow Year 2 profitability into a minor negative yield."
+        outcome="Survival protected | Business remains profitable in Year 3"
+        mitigations={[
+          "Push annual subscriptions to lock in usage and reduce cancellation flexibility",
+          "Strengthen customer success and onboarding support for the first 30 days",
+          "Focus on high-value, high-usage doctors (ICP refinement)",
+          "Improve product reliability and feature consistency to reduce 'churn-drivers'"
+        ]}
+        keyInsight="The business is sensitive to retention in the short term, but remains resilient if long-term usage and customer value are maintained."
+      />
     )
   }
 
@@ -116,6 +140,7 @@ function RiskContent({
   riskDescription, 
   metricLabel,
   prefix = "",
+  suffix = "",
   baseValues, 
   stressValues, 
   failureScenarios, 
@@ -158,24 +183,24 @@ function RiskContent({
                 <TableCell className="font-bold flex items-center gap-2">
                   <div className="size-1.5 rounded-full bg-emerald-500" /> Base Plan
                 </TableCell>
-                <TableCell className="text-right font-bold">{prefix}{baseValues[0].toLocaleString()}</TableCell>
-                <TableCell className="text-right font-bold">{prefix}{baseValues[1].toLocaleString()}</TableCell>
-                <TableCell className="text-right font-bold">{prefix}{baseValues[2].toLocaleString()}</TableCell>
+                <TableCell className="text-right font-bold">{prefix}{baseValues[0].toLocaleString()}{suffix}</TableCell>
+                <TableCell className="text-right font-bold">{prefix}{baseValues[1].toLocaleString()}{suffix}</TableCell>
+                <TableCell className="text-right font-bold">{prefix}{baseValues[2].toLocaleString()}{suffix}</TableCell>
               </TableRow>
               <TableRow className="font-mono text-sm h-12 bg-rose-500/[0.04]">
                 <TableCell className="font-bold text-rose-600 flex items-center gap-2">
                   <div className="size-1.5 rounded-full bg-rose-500" /> Stress Shock
                 </TableCell>
-                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[0].toLocaleString()}</TableCell>
-                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[1].toLocaleString()}</TableCell>
-                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[2].toLocaleString()}</TableCell>
+                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[0].toLocaleString()}{suffix}</TableCell>
+                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[1].toLocaleString()}{suffix}</TableCell>
+                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[2].toLocaleString()}{suffix}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
           <div className="p-4 bg-muted/10 flex items-center gap-2 border-t">
             <Info className="size-3.5 text-muted-foreground/60" />
             <p className="text-[10px] font-medium text-muted-foreground/80 italic">
-              “Cost rigidity means that infrastructure and G&A do not scale down if marketing efficiency drops.”
+              “Retention and churn volatility impact the compounding nature of the business model over time.”
             </p>
           </div>
         </CardContent>
@@ -239,9 +264,9 @@ function RiskContent({
                 <div key={idx} className="flex justify-between items-end border-b border-rose-100/50 pb-2">
                   <span className="text-[10px] font-bold uppercase text-muted-foreground/70">{row.label}</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-muted-foreground/40 line-through">{prefix}{row.base.toLocaleString()}</span>
+                    <span className="text-xs font-bold text-muted-foreground/40 line-through">{prefix}{row.base.toLocaleString()}{suffix}</span>
                     <ArrowRight className="size-3 text-rose-300" />
-                    <span className="text-lg font-bold text-rose-700">{prefix}{row.stress.toLocaleString()}</span>
+                    <span className="text-lg font-bold text-rose-700">{prefix}{row.stress.toLocaleString()}{suffix}</span>
                   </div>
                 </div>
               ))}
