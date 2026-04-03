@@ -29,6 +29,10 @@ const data = {
       url: "/dashboard/business-model",
       icon: <LayoutDashboardIcon />,
       isActive: true,
+      externalLink: {
+        label: "Business Model Calculation (.xlsx)",
+        href: "https://docs.google.com/spreadsheets/d/1iw32_xY9GK8rvOmlD7mMFPWC8wQOI26ChzLTe40qoXM/edit?usp=sharing",
+      },
       items: [
         {
           title: "Pricing",
