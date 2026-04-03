@@ -7,6 +7,7 @@ export function generateStaticParams() {
     { riskId: "risk2" },
     { riskId: "risk3" },
     { riskId: "risk4" },
+    { riskId: "risk5" },
   ]
 }
 

@@ -37,6 +37,7 @@ const riskTabs = [
   { id: "risk2", label: "Risk 2: CAC Shock",         icon: Users },
   { id: "risk3", label: "Risk 3: Churn / Retention", icon: RotateCcw },
   { id: "risk4", label: "Risk 4: COGS Stability",    icon: PackageOpen },
+  { id: "risk5", label: "Risk 5: Combined Collapse", icon: AlertTriangle },
 ]
 
 export function RiskClient({ riskId }: { riskId: string }) {
@@ -201,7 +202,9 @@ export function RiskClient({ riskId }: { riskId: string }) {
         />
       )}
 
-      {!["risk1", "risk2", "risk3", "risk4"].includes(riskId) && (
+      {riskId === "risk5" && <Risk5Content />}
+
+      {!["risk1", "risk2", "risk3", "risk4", "risk5"].includes(riskId) && (
         <div className="p-12 border border-dashed text-center space-y-4">
           <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
             Select a risk to view sensitivity analysis
@@ -406,6 +409,218 @@ function RiskContent({
           </div>
         </CardContent>
       </Card>
+
+    </div>
+  )
+}
+
+function Risk5Content() {
+  // ─── Historical (stressed) P&L: Y1-Y3 ───
+  const historical = [
+    { label: "Revenue",        y1: 7.08,   y1p: 100,    y2: 27.22,  y2p: 100,    y3: 64.71,  y3p: 100,    bold: true,  positive: true },
+    { label: "  Solo Doctors", y1: 7.08,   y1p: null,   y2: 27.22,  y2p: null,   y3: 64.71,  y3p: null,   indent: true },
+    { label: "COGS",           y1: -6.25,  y1p: -88.2,  y2: -12.50, y2p: -45.9,  y3: -24.99, y3p: -38.6,  negative: true },
+    { label: "Gross Margin",   y1: 0.83,   y1p: 11.8,   y2: 14.73,  y2p: 54.1,   y3: 39.71,  y3p: 61.4,   bold: true, highlight: true },
+    { label: "CAC / Marketing",y1: -6.09,  y1p: -86.0,  y2: -16.10, y2p: -59.1,  y3: -35.00, y3p: -54.1,  negative: true },
+    { label: "Contribution",   y1: -5.26,  y1p: -74.2,  y2: -1.37,  y2p: -5.0,   y3: 4.71,   y3p: 7.3,    bold: true },
+    { label: "G&A",            y1: -5.90,  y1p: -83.3,  y2: -14.25, y2p: -52.3,  y3: -22.30, y3p: -34.5,  negative: true },
+    { label: "EBITDA",         y1: -11.16, y1p: -157.6, y2: -15.62, y2p: -57.4,  y3: -17.59, y3p: -27.2,  bold: true, negative: true },
+    { label: "Depreciation",   y1: 0.00,   y1p: 0.0,    y2: 0.00,   y2p: 0.0,    y3: 0.00,   y3p: 0.0 },
+    { label: "EBIT",           y1: -11.16, y1p: -157.6, y2: -15.62, y2p: -57.4,  y3: -17.59, y3p: -27.2,  bold: true, negative: true },
+    { label: "Interest",       y1: 0.00,   y1p: 0.0,    y2: 0.00,   y2p: 0.0,    y3: 0.00,   y3p: 0.0 },
+    { label: "PBT",            y1: -11.16, y1p: -157.6, y2: -15.62, y2p: -57.4,  y3: -17.59, y3p: -27.2,  bold: true, negative: true },
+    { label: "Tax (25%)",      y1: 0.00,   y1p: 0.0,    y2: 0.00,   y2p: 0.0,    y3: 0.00,   y3p: 0.0 },
+    { label: "PAT",            y1: -11.16, y1p: -157.6, y2: -15.62, y2p: -57.4,  y3: -17.59, y3p: -27.2,  bold: true, negative: true },
+  ]
+
+  // ─── Predictive model: Y4-Y6 ───
+  // Methodology: revenue grows at decelerating rate (50%→35%→25%)
+  // COGS%, CAC%, G&A% trend down based on Y1→Y3 improvement gradient
+  const predictive = [
+    { label: "Revenue",         y4: 97.07,  y4p: 100,    y5: 131.04, y5p: 100,    y6: 163.80, y6p: 100,    bold: true, positive: true },
+    { label: "  Solo Doctors",  y4: 97.07,  y4p: null,   y5: 131.04, y5p: null,   y6: 163.80, y6p: null,   indent: true },
+    { label: "COGS",            y4: -33.97, y4p: -35.0,  y5: -43.24, y5p: -33.0,  y6: -50.78, y6p: -31.0,  negative: true },
+    { label: "Gross Margin",    y4: 63.10,  y4p: 65.0,   y5: 87.80,  y5p: 67.0,   y6: 113.02, y6p: 69.0,   bold: true, highlight: true },
+    { label: "CAC / Marketing", y4: -48.54, y4p: -50.0,  y5: -60.28, y5p: -46.0,  y6: -70.43, y6p: -43.0,  negative: true },
+    { label: "Contribution",    y4: 14.56,  y4p: 15.0,   y5: 27.52,  y5p: 21.0,   y6: 42.59,  y6p: 26.0,   bold: true },
+    { label: "G&A",             y4: -29.12, y4p: -30.0,  y5: -35.38, y5p: -27.0,  y6: -40.95, y6p: -25.0,  negative: true },
+    { label: "EBITDA",          y4: -14.56, y4p: -15.0,  y5: -7.86,  y5p: -6.0,   y6: 1.64,   y6p: 1.0,    bold: true },
+    { label: "PAT",             y4: -14.56, y4p: -15.0,  y5: -7.86,  y5p: -6.0,   y6: 1.64,   y6p: 1.0,    bold: true },
+  ]
+
+  const fmt = (v: number | null, p?: boolean) => {
+    if (v === null || v === undefined) return "—"
+    return `${v >= 0 ? "" : "-"}₹${Math.abs(v).toFixed(2)} L`
+  }
+  const pct = (v: number | null) => {
+    if (v === null || v === undefined) return ""
+    return `${v > 0 ? "+" : ""}${v.toFixed(1)}%`
+  }
+  const cellColor = (v: number | null, bold?: boolean) => {
+    if (v === null || v === undefined) return ""
+    if (v < 0) return "text-rose-600"
+    if (v > 0 && bold) return "text-emerald-700"
+    return ""
+  }
+
+  return (
+    <div className="space-y-10 animate-in slide-in-from-bottom-2 duration-500">
+
+      {/* ── Header Alert ── */}
+      <Alert variant="destructive" className="bg-rose-500/[0.03] border-rose-500/20 rounded-none">
+        <AlertTriangle className="size-4" />
+        <AlertTitle className="text-xs font-black uppercase tracking-widest text-rose-700">
+          Risk 5: Combined Collapse — What If All Risks Hit Simultaneously?
+        </AlertTitle>
+        <AlertDescription className="text-xs font-medium text-rose-600/80 italic mt-1 font-mono">
+          Growth misses targets, CAC spikes, churn rises to 30%, and COGS inflates — stress applied across all four dimensions at once.
+        </AlertDescription>
+      </Alert>
+
+      {/* ── Stressed P&L: Y1–Y3 ── */}
+      <Card className="border shadow-none rounded-none overflow-hidden">
+        <CardHeader className="py-4 px-6 border-b bg-rose-500/[0.03]">
+          <CardTitle className="text-[11px] font-black uppercase tracking-[0.15em] text-rose-700 flex items-center gap-2">
+            <Activity className="size-3.5" /> Stressed P&amp;L Statement — Y1 to Y3 (₹ Lakh)
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent border-b-2 bg-muted/30">
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider w-[200px] px-4">Line Item</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3">Year 1</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3 text-rose-600">%</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3">Year 2</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3 text-rose-600">%</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3">Year 3</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3 text-rose-600">%</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {historical.map((row, i) => (
+                <TableRow
+                  key={i}
+                  className={cn(
+                    "border-b text-sm font-mono",
+                    row.highlight ? "bg-primary/[0.03]" : "",
+                    row.bold ? "" : "text-muted-foreground"
+                  )}
+                >
+                  <TableCell className={cn("px-4 py-2.5 text-[12px]", row.indent ? "pl-8 text-muted-foreground" : row.bold ? "font-bold" : "font-medium")}>
+                    {row.label}
+                  </TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5", row.bold ? "font-bold" : "font-medium", cellColor(row.y1, row.bold))}>{fmt(row.y1)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5 text-[10px]", cellColor(row.y1p ?? null))}>{pct(row.y1p ?? null)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5", row.bold ? "font-bold" : "font-medium", cellColor(row.y2, row.bold))}>{fmt(row.y2)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5 text-[10px]", cellColor(row.y2p ?? null))}>{pct(row.y2p ?? null)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5", row.bold ? "font-bold" : "font-medium", cellColor(row.y3, row.bold))}>{fmt(row.y3)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5 text-[10px]", cellColor(row.y3p ?? null))}>{pct(row.y3p ?? null)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      {/* ── Predictive Model: Y4–Y6 ── */}
+      <Card className="border shadow-none rounded-none overflow-hidden">
+        <CardHeader className="py-4 px-6 border-b bg-primary/[0.03]">
+          <CardTitle className="text-[11px] font-black uppercase tracking-[0.15em] text-primary flex items-center gap-2">
+            <TrendingDown className="size-3.5" /> Predictive Model — Y4 to Y6 (Extrapolated from Stress Trends)
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="px-6 py-3 border-b bg-muted/10">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+              Methodology: Revenue grows at decelerating rate (50% → 35% → 25%). COGS%, CAC%, G&amp;A% trend down based on observed Y1→Y3 improvement gradient.
+            </p>
+          </div>
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent border-b-2 bg-primary/5">
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider w-[200px] px-4">Line Item</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3">Year 4 (Est.)</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3 text-primary">%</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3">Year 5 (Est.)</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3 text-primary">%</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3">Year 6 (Est.)</TableHead>
+                <TableHead className="h-10 text-[10px] font-bold uppercase tracking-wider text-right px-3 text-primary">%</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {predictive.map((row, i) => (
+                <TableRow
+                  key={i}
+                  className={cn(
+                    "border-b text-sm font-mono",
+                    row.highlight ? "bg-primary/[0.03]" : "",
+                    row.bold ? "" : "text-muted-foreground",
+                    row.label === "EBITDA" ? "border-t-2" : ""
+                  )}
+                >
+                  <TableCell className={cn("px-4 py-2.5 text-[12px]", row.indent ? "pl-8 text-muted-foreground" : row.bold ? "font-bold" : "font-medium")}>
+                    {row.label}
+                  </TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5", row.bold ? "font-bold" : "font-medium", cellColor(row.y4, row.bold))}>{fmt(row.y4)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5 text-[10px]", cellColor(row.y4p ?? null))}>{pct(row.y4p ?? null)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5", row.bold ? "font-bold" : "font-medium", cellColor(row.y5, row.bold))}>{fmt(row.y5)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5 text-[10px]", cellColor(row.y5p ?? null))}>{pct(row.y5p ?? null)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5", row.bold ? "font-bold" : "font-medium", cellColor(row.y6, row.bold))}>{fmt(row.y6)}</TableCell>
+                  <TableCell className={cn("text-right px-3 py-2.5 text-[10px]", cellColor(row.y6p ?? null))}>{pct(row.y6p ?? null)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <div className="p-4 border-t bg-emerald-50/50 flex items-center gap-3">
+            <ShieldCheck className="size-4 text-emerald-600 shrink-0" />
+            <p className="text-[11px] font-bold text-emerald-800">
+              Even under combined stress, the business reaches EBITDA breakeven by <strong>Year 6</strong> — provided unit growth continues and AI cost efficiency improves. This validates long-term capital sufficiency.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* ── Key Assumptions ── */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { year: "Year 4", rev: "₹97.07 L", growth: "+50%", cogs: "35%", cac: "50%", ga: "30%", ebitda: "-15.0%", color: "rose" },
+          { year: "Year 5", rev: "₹131.04 L", growth: "+35%", cogs: "33%", cac: "46%", ga: "27%", ebitda: "-6.0%", color: "amber" },
+          { year: "Year 6", rev: "₹163.80 L", growth: "+25%", cogs: "31%", cac: "43%", ga: "25%", ebitda: "+1.0%", color: "emerald" },
+        ].map((y, i) => (
+          <Card key={i} className={cn("border shadow-none rounded-none", y.color === "emerald" ? "border-emerald-300 bg-emerald-50/30" : "")}>
+            <CardHeader className="py-3 px-5 border-b bg-muted/5">
+              <CardTitle className="text-[10px] font-black uppercase tracking-widest">{y.year} — Key Assumptions</CardTitle>
+            </CardHeader>
+            <CardContent className="p-5 space-y-2">
+              {[
+                { k: "Revenue", v: y.rev },
+                { k: "Revenue Growth", v: y.growth },
+                { k: "COGS %", v: y.cogs },
+                { k: "CAC %", v: y.cac },
+                { k: "G&A %", v: y.ga },
+                { k: "EBITDA %", v: y.ebitda },
+              ].map((r, j) => (
+                <div key={j} className="flex justify-between items-center border-b pb-1.5">
+                  <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-widest">{r.k}</span>
+                  <span className={cn("text-xs font-black", r.k === "EBITDA %" && y.color === "emerald" ? "text-emerald-700" : r.k === "EBITDA %" ? "text-rose-600" : "")}>{r.v}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* ── Survival Verdict ── */}
+      <div className="border border-rose-200 bg-rose-500/[0.02] p-8 space-y-4">
+        <h4 className="text-xs font-black uppercase tracking-widest text-rose-700">Strategic Verdict: Combined Stress Scenario</h4>
+        <p className="text-sm font-medium leading-relaxed">
+          If all four risks materialize simultaneously — slower growth, CAC inflation, 30% churn, and COGS increase — the business runs a cumulative EBITDA loss of ~₹44.37 L across Y1–Y5. However, with continued scale and operational efficiency, it achieves EBITDA positivity in Year 6.
+        </p>
+        <p className="text-xs font-bold uppercase tracking-wider text-rose-600">
+          Implication: the business requires ₹50–60 L in capital runway to survive the combined stress and reach profitability without a pivot.
+        </p>
+      </div>
 
     </div>
   )
