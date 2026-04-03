@@ -34,8 +34,9 @@ export function RiskClient({ riskId }: { riskId: string }) {
       <RiskContent 
         riskTitle="Risk 1: Overestimated Unit Growth"
         riskDescription="Lower adoption rate due to slower market entry or longer sales cycles"
-        baseUsers={[50, 100, 200]}
-        stressUsers={[35, 70, 140]}
+        metricLabel="Doctors"
+        baseValues={[50, 100, 200]}
+        stressValues={[35, 70, 140]}
         failureScenarios={[
           "Revenue drops significantly (proportionally)",
           "CAC efficiency worsens (fixed marketing spend spreads across fewer users)",
@@ -47,8 +48,8 @@ export function RiskClient({ riskId }: { riskId: string }) {
           "Marketing/CAC is already spent upfront to acquire current base"
         ]}
         ebitdaImpact="Negative in Year 2 (~ -13%)"
+        impactNote="Fixed G&A spreads across 30% fewer units driving negative yield."
         outcome="Profitability delayed | Business still profitable in Year 3"
-        outcomeStatus="survivable"
         mitigations={[
           "Lock distribution partnerships early to guarantee baseline volume",
           "Focus on 1–2 high-conversion acquisition channels exclusively",
@@ -61,11 +62,35 @@ export function RiskClient({ riskId }: { riskId: string }) {
 
   if (riskId === "risk2") {
     return (
-      <div className="p-12 border border-dashed text-center space-y-4">
-        <TrendingDown className="size-12 text-muted-foreground mx-auto opacity-20" />
-        <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Detailed CAC Sensitivity Modeling In Progress</p>
-        <p className="text-xs text-muted-foreground">Scenario: 1.5x CAC with 0.8% conversion stress test</p>
-      </div>
+      <RiskContent 
+        riskTitle="Risk 2: CAC Shock (Marketing Stops Working)"
+        riskDescription="Rising acquisition costs due to funnel breakdown or increased competition"
+        metricLabel="CAC (₹)"
+        prefix="₹"
+        baseValues={[17400, 6960, 4350]}
+        stressValues={[22000, 18000, 15000]}
+        failureScenarios={[
+          "Conversion drops significantly (5% → 3%)",
+          "Paid channels become more expensive due to saturation",
+          "Referrals do not scale as expected (organic dampening)",
+          "Doctors delay or hesitate in decision-making (longer sales cycles)"
+        ]}
+        costRigidityPoints={[
+          "G&A remains mostly fixed despite efficiency drops",
+          "Infrastructure costs do not reduce proportionally",
+          "CAC is already spent upfront to acquire current base"
+        ]}
+        ebitdaImpact="-28.2% in Year 2 (vs +2.1% in base case)"
+        impactNote="High CAC inflation in early stages severely compresses EBITDA margins."
+        outcome="Break-even delayed | Business remains profitable in Year 3"
+        mitigations={[
+          "Partner with medical associations for trusted distribution",
+          "Integrate with EMR vendors to reduce acquisition cost",
+          "Bundle into hospital software ecosystems as an add-on",
+          "Shift focus toward organic and referral-led growth"
+        ]}
+        keyInsight="The business is sensitive to CAC inflation in early stages, but improves as reliance shifts from paid acquisition to distribution."
+      />
     )
   }
 
@@ -81,7 +106,7 @@ export function RiskClient({ riskId }: { riskId: string }) {
 
   return (
     <div className="p-12 border border-dashed text-center space-y-4">
-      <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Scenario details not found</p>
+      <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Select a risk to view sensitivity analysis</p>
     </div>
   )
 }
@@ -89,14 +114,17 @@ export function RiskClient({ riskId }: { riskId: string }) {
 function RiskContent({ 
   riskTitle, 
   riskDescription, 
-  baseUsers, 
-  stressUsers, 
+  metricLabel,
+  prefix = "",
+  baseValues, 
+  stressValues, 
   failureScenarios, 
   costRigidityPoints,
   ebitdaImpact,
+  impactNote,
   outcome,
-  outcomeStatus,
-  mitigations
+  mitigations,
+  keyInsight
 }: any) {
   return (
     <div className="space-y-10 animate-in slide-in-from-bottom-2 duration-500">
@@ -113,7 +141,7 @@ function RiskContent({
       {/* 🔷 SECTION 3: BASE VS STRESS COMPARISON */}
       <Card className="border shadow-none rounded-none overflow-hidden underline-none">
         <CardHeader className="py-4 px-6 border-b bg-muted/5">
-          <CardTitle className="text-[11px] font-bold uppercase tracking-[0.1em] text-foreground">Base vs Stress Adoption (Doctors)</CardTitle>
+          <CardTitle className="text-[11px] font-bold uppercase tracking-[0.1em] text-foreground">Base vs Stress Comparison ({metricLabel})</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <Table>
@@ -130,24 +158,24 @@ function RiskContent({
                 <TableCell className="font-bold flex items-center gap-2">
                   <div className="size-1.5 rounded-full bg-emerald-500" /> Base Plan
                 </TableCell>
-                <TableCell className="text-right font-bold">{baseUsers[0]}</TableCell>
-                <TableCell className="text-right font-bold">{baseUsers[1]}</TableCell>
-                <TableCell className="text-right font-bold">{baseUsers[2]}</TableCell>
+                <TableCell className="text-right font-bold">{prefix}{baseValues[0].toLocaleString()}</TableCell>
+                <TableCell className="text-right font-bold">{prefix}{baseValues[1].toLocaleString()}</TableCell>
+                <TableCell className="text-right font-bold">{prefix}{baseValues[2].toLocaleString()}</TableCell>
               </TableRow>
               <TableRow className="font-mono text-sm h-12 bg-rose-500/[0.04]">
                 <TableCell className="font-bold text-rose-600 flex items-center gap-2">
-                  <div className="size-1.5 rounded-full bg-rose-500" /> Stress Test (30% Drop)
+                  <div className="size-1.5 rounded-full bg-rose-500" /> Stress Shock
                 </TableCell>
-                <TableCell className="text-right font-bold text-rose-600">{stressUsers[0]}</TableCell>
-                <TableCell className="text-right font-bold text-rose-600">{stressUsers[1]}</TableCell>
-                <TableCell className="text-right font-bold text-rose-600">{stressUsers[2]}</TableCell>
+                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[0].toLocaleString()}</TableCell>
+                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[1].toLocaleString()}</TableCell>
+                <TableCell className="text-right font-bold text-rose-600">{prefix}{stressValues[2].toLocaleString()}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
           <div className="p-4 bg-muted/10 flex items-center gap-2 border-t">
             <Info className="size-3.5 text-muted-foreground/60" />
             <p className="text-[10px] font-medium text-muted-foreground/80 italic">
-              “If adoption is lower than expected, revenue declines proportionally while most costs remain fixed.”
+              “Cost rigidity means that infrastructure and G&A do not scale down if marketing efficiency drops.”
             </p>
           </div>
         </CardContent>
@@ -204,16 +232,16 @@ function RiskContent({
             </div>
             <div className="space-y-4">
               {[
-                { label: "Y1 Growth", base: 50, stress: stressUsers[0] },
-                { label: "Y2 Expansion", base: 100, stress: stressUsers[1] },
-                { label: "Y3 Scale", base: 200, stress: stressUsers[2] },
+                { label: "Year 1", base: baseValues[0], stress: stressValues[0] },
+                { label: "Year 2", base: baseValues[1], stress: stressValues[1] },
+                { label: "Year 3", base: baseValues[2], stress: stressValues[2] },
               ].map((row, idx) => (
                 <div key={idx} className="flex justify-between items-end border-b border-rose-100/50 pb-2">
                   <span className="text-[10px] font-bold uppercase text-muted-foreground/70">{row.label}</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-muted-foreground/40 line-through">{row.base}</span>
+                    <span className="text-xs font-bold text-muted-foreground/40 line-through">{prefix}{row.base.toLocaleString()}</span>
                     <ArrowRight className="size-3 text-rose-300" />
-                    <span className="text-lg font-bold text-rose-700">{row.stress}</span>
+                    <span className="text-lg font-bold text-rose-700">{prefix}{row.stress.toLocaleString()}</span>
                   </div>
                 </div>
               ))}
@@ -229,7 +257,7 @@ function RiskContent({
               <div className="text-3xl font-bold tracking-tighter text-rose-700">{ebitdaImpact}</div>
             </div>
             <p className="text-[10px] font-medium text-rose-950/40 italic leading-normal">
-              Fixed G&A spreads across 30% fewer units driving negative yield in Year 2.
+              {impactNote}
             </p>
           </div>
 
@@ -246,7 +274,7 @@ function RiskContent({
                </p>
             </div>
             <p className="text-[10px] font-medium text-muted-foreground/60 leading-normal italic">
-              “The stress test model shows capital reserves cover Y2 losses, reaching profitability on recovery.”
+              {keyInsight || "“The stress test model shows capital reserves cover Y2 losses, reaching profitability on recovery.”"}
             </p>
           </div>
 
