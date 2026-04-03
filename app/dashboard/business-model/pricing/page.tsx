@@ -417,7 +417,7 @@ function PricingContent() {
   }, []);
 
   return (
-    <section className="container mx-auto py-6 animate-in fade-in duration-700 space-y-8">
+    <section className="container mx-auto animate-in fade-in duration-700 space-y-8">
       {/* 🔷 Dashboard Header */}
       <div className="flex flex-col gap-0.5">
         <h1 className="text-2xl font-bold tracking-tight text-left">Pricing & Commercial Tiers</h1>
