@@ -375,7 +375,7 @@ function RiskContent({
               <p className="text-xs font-bold text-rose-950/80 leading-relaxed uppercase tracking-tight">{outcome}</p>
             </div>
             <p className="text-[10px] font-medium text-muted-foreground/60 leading-normal italic">
-              {keyInsight || ""The stress test model shows capital reserves cover Y2 losses, reaching profitability on recovery.""}
+              {keyInsight || `"The stress test model shows capital reserves cover Y2 losses, reaching profitability on recovery."`}
             </p>
           </div>
         </div>
