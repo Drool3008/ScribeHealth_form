@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { AlertTriangle, TrendingDown, ShieldAlert } from "lucide-react"
+import { AlertTriangle, TrendingDown, ShieldAlert, Zap } from "lucide-react"
 
 const riskTabs = [
   { 
@@ -21,9 +21,15 @@ const riskTabs = [
   },
   { 
     id: "risk3", 
-    label: "Risk 3: Retention / Churn", 
+    label: "Risk 3: Churn / Retention", 
     href: "/dashboard/business-model/risks/risk3",
     icon: <ShieldAlert className="size-3 mr-2 text-rose-500" />
+  },
+  { 
+    id: "risk4", 
+    label: "Risk 4: COGS Stability", 
+    href: "/dashboard/business-model/risks/risk4",
+    icon: <Zap className="size-3 mr-2 text-rose-500" />
   },
 ]
 

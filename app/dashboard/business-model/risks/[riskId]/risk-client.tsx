@@ -128,6 +128,43 @@ export function RiskClient({ riskId }: { riskId: string }) {
     )
   }
 
+  if (riskId === "risk4") {
+    return (
+      <RiskContent 
+        riskTitle="Risk 4: COGS Instability (Cost Structure Risk)"
+        riskDescription="Efficiency risk from rising AI/infrastructure delivery costs which compress gross margins."
+        metricLabel="COGS per Doctor (₹)"
+        prefix="₹"
+        baseValues={[17851, 17851, 17851]}
+        stressValues={[22000, 23000, 25000]}
+        sectionTitleLeft="What Could Go Wrong?"
+        sectionTitleRight="Outcome"
+        failureScenarios={[
+          "STT (Speech-to-Text) costs increase beyond expectations",
+          "LLM/AI API pricing changes unexpectedly or model shifts",
+          "Usage per doctor increases beyond the initial forecast",
+          "Inefficient prompt engineering drives up inference cost"
+        ]}
+        costRigidityPoints={[
+          "Gross margin compresses directly across all pricing tiers",
+          "Contribution margin drops, making CAC recovery harder",
+          "LTV reduces significantly even if revenue stays stable",
+          "You may not cover acquisition costs in the first 6-8 months"
+        ]}
+        ebitdaImpact="-10.8% in Year 2 (vs +2.1% in base case)"
+        impactNote="If AI costs rise another 15-20% beyond this, Y3 profitability becomes fragile."
+        outcome="Survival protected | Viability depends on AI cost control"
+        mitigations={[
+          "Lock AI API pricing contracts where possible for 12 months",
+          "Optimize model usage and reduce unnecessary inference cycles",
+          "Continuously track per-consult cost monthly vs revenue yield",
+          "Improve infrastructure efficiency and prompt optimization over time"
+        ]}
+        keyInsight="The business remains viable, but profitability is highly sensitive to AI pricing stability and cost control."
+      />
+    )
+  }
+
   return (
     <div className="p-12 border border-dashed text-center space-y-4">
       <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Select a risk to view sensitivity analysis</p>
@@ -145,6 +182,8 @@ function RiskContent({
   stressValues, 
   failureScenarios, 
   costRigidityPoints,
+  sectionTitleLeft = "Failure Scenario",
+  sectionTitleRight = "Cost Rigidity",
   ebitdaImpact,
   impactNote,
   outcome,
@@ -211,7 +250,7 @@ function RiskContent({
         <Card className="border shadow-none rounded-none bg-rose-500/[0.02]">
            <CardHeader className="py-4 px-6 border-b border-rose-100">
              <CardTitle className="text-[11px] font-bold uppercase tracking-widest text-rose-700 flex items-center gap-2">
-               <Target className="size-3.5 text-rose-500" /> Failure Scenario
+               <Target className="size-3.5 text-rose-500" /> {sectionTitleLeft}
              </CardTitle>
            </CardHeader>
            <CardContent className="p-6 space-y-4">
@@ -230,7 +269,7 @@ function RiskContent({
         <Card className="border shadow-none rounded-none bg-muted/5">
            <CardHeader className="py-4 px-6 border-b border-muted">
              <CardTitle className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-               <Zap className="size-3.5 text-amber-500" /> Cost Rigidity
+               <Zap className="size-3.5 text-amber-500" /> {sectionTitleRight}
              </CardTitle>
            </CardHeader>
            <CardContent className="p-6 space-y-4">
