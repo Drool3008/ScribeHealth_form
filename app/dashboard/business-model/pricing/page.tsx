@@ -111,15 +111,15 @@ const pricingStrategyData = {
   ]
 };
 
-function PricingStrategySheet() {
+function PricingStrategySheet({ open, onOpenChange }: { open?: boolean, onOpenChange?: (open: boolean) => void }) {
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <Button variant="outline" className="rounded-none border-primary/20 text-xs font-bold uppercase tracking-widest h-10 px-6">
           Pricing Strategy
         </Button>
       </SheetTrigger>
-      <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col">      <SheetHeader className="p-6 border-b sticky top-0 bg-background z-20">
+      <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col focus:outline-none focus:ring-0">      <SheetHeader className="p-6 border-b sticky top-0 bg-background z-20">
         <SheetTitle className="text-2xl font-bold uppercase tracking-tight">Pricing Strategy</SheetTitle>
         <SheetDescription className="text-sm font-medium uppercase tracking-widest">How pricing converts into revenue</SheetDescription>
       </SheetHeader>
@@ -392,8 +392,23 @@ function PricingGrid({ plans }: { plans: Plan[] }) {
   )
 }
 
+import { useSearchParams, useRouter } from "next/navigation"
+
 export default function PricingPage() {
   const [showGuide, setShowGuide] = React.useState(true);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const isStrategyOpen = searchParams.get("view") === "strategy";
+
+  const setStrategyOpen = (open: boolean) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (open) {
+      params.set("view", "strategy");
+    } else {
+      params.delete("view");
+    }
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
 
   React.useEffect(() => {
     const timer = setTimeout(() => setShowGuide(false), 8000);
@@ -427,7 +442,7 @@ export default function PricingPage() {
           </TabsList>
 
           <GuideTooltip text="Click here to view pricing strategy" show={showGuide} onDismiss={() => setShowGuide(false)}>
-            <PricingStrategySheet />
+            <PricingStrategySheet open={isStrategyOpen} onOpenChange={setStrategyOpen} />
           </GuideTooltip>
         </div>
 

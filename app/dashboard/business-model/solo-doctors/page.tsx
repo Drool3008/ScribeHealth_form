@@ -25,8 +25,23 @@ import { GuideTooltip } from "../guide-tooltip"
 
 const cn = (...classes: any[]) => classes.filter(Boolean).join(" ")
 
+import { useSearchParams, useRouter } from "next/navigation"
+
 export default function SoloDoctorsPage() {
   const [showGuide, setShowGuide] = React.useState(true);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const currentView = searchParams.get("view");
+
+  const setView = (view: string | null) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (view) {
+      params.set("view", view);
+    } else {
+      params.delete("view");
+    }
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
 
   React.useEffect(() => {
     const timer = setTimeout(() => setShowGuide(false), 8000);
@@ -69,11 +84,11 @@ export default function SoloDoctorsPage() {
               </CardTitle>
             </div>
             <GuideTooltip text="See revenue math & projection" show={showGuide} onDismiss={() => setShowGuide(false)}>
-              <Sheet>
+              <Sheet open={currentView === "revenue"} onOpenChange={(open) => setView(open ? "revenue" : null)}>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="sm" className="h-7 text-[10px] px-3 rounded-none font-bold border-primary/20 text-primary hover:bg-primary/5 uppercase">See Calculation</Button>
                 </SheetTrigger>
-                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col">
+                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col focus:outline-none focus:ring-0">
                   <SheetHeader className="p-6 border-b sticky top-0 bg-background z-20">
                     <SheetTitle className="text-2xl font-bold uppercase tracking-tight text-left">Revenue Breakdown</SheetTitle>
                     <SheetDescription className="text-sm font-medium uppercase tracking-widest text-left">Blended Subscription Revenue Model</SheetDescription>
@@ -132,11 +147,11 @@ export default function SoloDoctorsPage() {
               <Zap className="size-3 text-primary" /> Delivery Cost (COGS)
             </CardTitle>
             <GuideTooltip text="View COGS breakdown logic" show={showGuide} onDismiss={() => setShowGuide(false)}>
-              <Sheet>
+              <Sheet open={currentView === "cogs"} onOpenChange={(open) => setView(open ? "cogs" : null)}>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="sm" className="h-7 text-[10px] px-3 rounded-none font-bold border-primary/20 text-primary hover:bg-primary/5 uppercase">See Calculation</Button>
                 </SheetTrigger>
-                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col">
+                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col focus:outline-none focus:ring-0">
                   <SheetHeader className="p-6 border-b sticky top-0 bg-background z-20">
                     <SheetTitle className="text-2xl font-bold tracking-tight text-left">Delivery Cost (COGS) Analysis</SheetTitle>
                     <SheetDescription className="text-sm font-medium text-muted-foreground text-left uppercase tracking-widest">Technical Cost Modeling & Logic</SheetDescription>
@@ -281,11 +296,11 @@ export default function SoloDoctorsPage() {
               <Users className="size-3 text-primary" /> Acquisition (CAC)
             </CardTitle>
             <GuideTooltip text="Examine CAC funnel details" show={showGuide} onDismiss={() => setShowGuide(false)}>
-              <Sheet>
+              <Sheet open={currentView === "cac"} onOpenChange={(open) => setView(open ? "cac" : null)}>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="sm" className="h-7 text-[10px] px-3 rounded-none font-bold border-primary/20 text-primary hover:bg-primary/5 uppercase">See Calculation</Button>
                 </SheetTrigger>
-                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col">
+                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col focus:outline-none focus:ring-0">
                   <SheetHeader className="p-6 border-b sticky top-0 bg-background z-20">
                     <SheetTitle className="text-2xl font-bold tracking-tight text-left">Customer Acquisition Cost (CAC) Logic</SheetTitle>
                     <SheetDescription className="text-sm font-medium text-muted-foreground text-left uppercase tracking-widest">Growth Funnel & Conversion Modeling</SheetDescription>

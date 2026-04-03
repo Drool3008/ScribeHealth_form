@@ -25,8 +25,23 @@ import { GuideTooltip } from "../guide-tooltip"
 
 const cn = (...classes: any[]) => classes.filter(Boolean).join(" ")
 
+import { useSearchParams, useRouter } from "next/navigation"
+
 export default function LTVPage() {
   const [showGuide, setShowGuide] = React.useState(true);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const currentView = searchParams.get("view");
+
+  const setView = (view: string | null) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (view) {
+      params.set("view", view);
+    } else {
+      params.delete("view");
+    }
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
 
   React.useEffect(() => {
     const timer = setTimeout(() => setShowGuide(false), 8000);
@@ -67,11 +82,11 @@ export default function LTVPage() {
               <DollarSign className="size-3 text-primary" /> LTV Estimate
             </CardTitle>
             <GuideTooltip text="See lifetime value math" show={showGuide} onDismiss={() => setShowGuide(false)}>
-              <Sheet>
+              <Sheet open={currentView === "ltv"} onOpenChange={(open) => setView(open ? "ltv" : null)}>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="sm" className="h-7 text-[10px] px-3 rounded-none font-bold border-primary/20 text-primary hover:bg-primary/5 uppercase">See Math</Button>
                 </SheetTrigger>
-                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col">
+                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col focus:outline-none focus:ring-0">
                 <SheetHeader className="p-6 border-b sticky top-0 bg-background z-20">
                   <SheetTitle className="text-2xl font-bold tracking-tight text-left">LTV Calculation Logic</SheetTitle>
                   <SheetDescription className="text-sm font-medium text-muted-foreground text-left uppercase tracking-widest">How lifetime value is derived</SheetDescription>
@@ -173,11 +188,11 @@ export default function LTVPage() {
               <Target className="size-3 text-primary" /> Marketing Ratio
             </CardTitle>
             <GuideTooltip text="Analyze LTV:CAC sensitivity" show={showGuide} onDismiss={() => setShowGuide(false)}>
-              <Sheet>
+              <Sheet open={currentView === "sensitivity"} onOpenChange={(open) => setView(open ? "sensitivity" : null)}>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="sm" className="h-7 text-[10px] px-3 rounded-none font-bold border-primary/20 text-primary hover:bg-primary/5 uppercase">Sensitivity</Button>
                 </SheetTrigger>
-                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col">
+                <SheetContent className="!w-[800px] !max-w-none rounded-none border-l shadow-none p-0 flex flex-col focus:outline-none focus:ring-0">
                 <SheetHeader className="p-6 border-b sticky top-0 bg-background z-20">
                   <SheetTitle className="text-2xl font-bold tracking-tight text-left">LTV : CAC Sensitivity Analysis</SheetTitle>
                   <SheetDescription className="text-sm font-medium text-muted-foreground text-left uppercase tracking-widest">Edge Case Testing: 1% Conversion</SheetDescription>

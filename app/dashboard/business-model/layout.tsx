@@ -26,7 +26,7 @@ export default function BusinessModelLayout({ children }: { children: React.Reac
       <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b px-4 lg:px-6">
         <div className="flex items-center space-x-1 no-scrollbar overflow-x-auto py-2">
           {tabs.map((tab) => {
-            const isActive = pathname === tab.href
+            const isActive = pathname.startsWith(tab.href)
             return (
               <Link
                 key={tab.name}
