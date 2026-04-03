@@ -62,6 +62,10 @@ const data = {
           title: "G&A",
           url: "/dashboard/business-model/ga",
         },
+        {
+          title: "Risks",
+          url: "/dashboard/business-model/risks",
+        },
       ],
     },
     {

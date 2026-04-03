@@ -15,6 +15,7 @@ const tabs = [
   { name: "Cash Flow", href: "/dashboard/business-model/cash-flow" },
   { name: "LTV", href: "/dashboard/business-model/ltv" },
   { name: "G&A", href: "/dashboard/business-model/ga" },
+  { name: "Risks", href: "/dashboard/business-model/risks" },
 ]
 
 export default function BusinessModelLayout({ children }: { children: React.ReactNode }) {
